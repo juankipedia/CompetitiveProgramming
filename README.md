@@ -16,6 +16,7 @@ guide to train for competitive contests.
 
 ## Folders
 CodeGym/01 -> Data structures supported by the C++ STL.
+
 CodeGym/02 -> Data structures not supported by the C++ STL 
               (graphs, Union-Find Disjoint Sets, segmented tree)
 
