@@ -24,3 +24,7 @@ CodeGym/02 -> Data structures not supported by the C++ STL
 * COJ
 * UVa
 * TopCoder
+
+## Reference
+* Competitive Programming, Steven & Felix.
+* [cplusplus.com](http://www.cplusplus.com/)
