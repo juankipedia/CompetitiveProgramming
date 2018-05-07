@@ -21,6 +21,25 @@ findSet(j),what is the representative of item ‘j’, and assign that value to
 pset[findSet(i)], update the parent of the representative item of item ‘i’.
 Lets look at a quick example:
 
+supose that we have following disjoint sets:
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_1.png)
+Initially there are 10 subsets and each subset has single element in it. 
+
+When each subset contains only single element, the vector pset is: 
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_1.png)
+
+if we perform unionSet(2,1), we have:
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_2.png)
+
+and pset looks like:
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_2.png)
+
+now performing unionSet(4, 3), unionSet(8, 4), unionSet(9, 3):
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_3.png)
+
+for pset:
+![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_3.png)
+
 
 ## Find Set
 This function recursively calls itself whenever pset[i] is not yet itself (‘i’). 
@@ -29,3 +48,36 @@ compress the path by saying pset[i] = x. Thus subsequent calls of findSet(i) wil
 be O(1). This simple heuristic strategy is aptly named as ‘Path Compression’.
 Lets look at a quick example:
 
+
+## Code
+If we implement all theory we have seen above we have following code:
+
+~~~
+# include <bits/stdc++.h>
+using namespace std;
+
+vector<int> pset(1000);
+
+void initSet(int _size){ 
+	pset.resize(_size); 
+	for(size_t i = 0; i < size; i++) 
+		pset[i] = i; 
+}
+
+int findSet(int i){ 
+	return (pset[i] == i) ? i : (pset[i] = findSet(pset[i])); 
+}
+
+void unionSet(int i, int j){ 
+	pset[findSet(i)] = findSet(j); 
+}
+
+bool isSameSet(int i, int j){ 
+	return findSet(i) == findSet(j); 
+}
+
+int main(){
+	
+	return 0;
+}
+~~~
