@@ -22,22 +22,34 @@ pset[findSet(i)], update the parent of the representative item of item ‘i’.
 Lets look at a quick example:
 
 supose that we have following disjoint sets:
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_1.png)
+
 Initially there are 10 subsets and each subset has single element in it. 
 
+
+
 When each subset contains only single element, the vector pset is: 
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_1.png)
 
 if we perform unionSet(2,1), we have:
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_2.png)
 
+
 and pset looks like:
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_2.png)
 
+
 now performing unionSet(4, 3), unionSet(8, 4), unionSet(9, 3):
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_nodes_3.png)
 
+
 for pset:
+
 ![disjoint_set_1](/CodeGym/03/images/disjoint_set_array_3.png)
 
 
@@ -77,7 +89,7 @@ bool isSameSet(int i, int j){
 }
 
 int main(){
-	
+
 	return 0;
 }
 ~~~
