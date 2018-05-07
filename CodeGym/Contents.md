@@ -1,6 +1,6 @@
 # Contents
 
-## [00](https://github.com/juankipedia/CompetitiveProgramming/tree/master/CodeGym/00)
+#### [00](https://github.com/juankipedia/CompetitiveProgramming/tree/master/CodeGym/00)
 
 #### [01](https://github.com/juankipedia/CompetitiveProgramming/tree/master/CodeGym/01)
 	1 Data Structures
