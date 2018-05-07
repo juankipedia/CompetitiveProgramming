@@ -28,3 +28,6 @@ CodeGym/02 -> Data structures not supported by the C++ STL
 ## Reference
 * Competitive Programming, Steven & Felix.
 * [cplusplus.com](http://www.cplusplus.com/)
+
+### Join us at Telegram!
+https://t.me/joinchat/Bb3ChxLtmR5sDOeI4OygOQ
