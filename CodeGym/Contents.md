@@ -3,11 +3,11 @@
 ## 00
 
 ## 01
-### Data Structures
-#### Data Structures with Built-in Libraries
-##### Linear Data Structures
-##### Non-Linear Data Structures
-#### Data Structures with Our-Own Libraries
+	Data Structures
+		Data Structures with Built-in Libraries
+			Linear Data Structures
+			Non-Linear Data Structures
+		Data Structures with Our-Own Libraries
 
 ## 02
 ### Graph
