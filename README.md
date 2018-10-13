@@ -3,12 +3,10 @@
 ## Contributors:
 * Juan Diego
 * Marco Sandoval
-* Anthony Dugarte
 
 ## Emails:
 * juandiegp17@gmail.com
 * kada9001@gmail.com
-* toonny1998@gmail.com
 
 ## Description:
 Exercises that has been solve on some competitive programming platforms and
