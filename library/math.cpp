@@ -23,20 +23,27 @@ long long unsigned int Fibonacci(long long unsigned int n){
 }
 //###############################################################################################################
 template<typename T>
-T pow(T n, T e)
-{
+T pow(T n, T e){
     T res { 1 };
-
-    while(e > T(0))
-    {
+    while(e > T(0)){
       if (e & 1)
         res = res * n;
-
       e >>= 1;
       n = n * n;
     }
-
     return res;
+}
+//################################################################################################################
+template <typename T>
+T modpow(T n, T e, T m) {
+  n %= m;
+  T result = 1;
+  while (e > 0) {
+    if (e & 1) result = (result * n) % m;
+    n = (n * n) % m;
+    e >>= 1;
+  }
+  return result;
 }
 //################################################################################################################
 bool is_prime(int n) {
