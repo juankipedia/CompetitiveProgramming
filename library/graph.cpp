@@ -122,8 +122,29 @@ template <class T> void split(Graph<T> & g, vector<Graph<T> > &l){
 		}
 }
 
+
+template <class T> class O_graph : public map<T, pair<vector<T>, bool> >{
+	public:
+		O_graph(){}
+		~O_graph(){} 
+};
+
+template <class T> void __dft_topological(const T &n, O_graph<T> &g, stack<T> &t_o){
+	if(g[n].second) return;
+	g[n].second = true;
+	for (const T &e : g[n].first) __dft_topological(e, g, t_o);
+	t_o.push(n);
+}
+
+template <class T> void topological_order(O_graph<T> & g, stack<T> &t_o){
+	for(const pair<T, pair<vector<T>, bool> > &n : g)
+		if(n.second.second) continue;
+		else __dft_topological<T>(n.first, g, t_o);
+}
+
+
 int main(){
-	Graph<unsigned int> g;
+	/*Graph<unsigned int> g;
 	unsigned int k = 0;
 	g[1] = make_pair(vector<unsigned int>({2, 3}), false);
 	g[2] = make_pair(vector<unsigned int>({4, 1}), false);
@@ -137,9 +158,25 @@ int main(){
 	g[10] = make_pair(vector<unsigned int>({}), false);
 	g[11] = make_pair(vector<unsigned int>({12, 13}), false);
 	g[12] = make_pair(vector<unsigned int>({11}), false);
-	g[13] = make_pair(vector<unsigned int>({11}), false);
-	vector<Graph<unsigned int> > l;
-	split(g, l);
+	g[13] = make_pair(vector<unsigned int>({11}), false);*/
+	O_graph<char> g;
+	g['a'] = make_pair(vector<char>({'b', 'f'}), false);
+	g['b'] = make_pair(vector<char>({'h'}), false);
+	g['c'] = make_pair(vector<char>(), false);
+	g['d'] = make_pair(vector<char>({'c', 'e', 'i', 'h'}), false);
+	g['e'] = make_pair(vector<char>({'i'}), false);
+	g['f'] = make_pair(vector<char>({}), false);
+	g['g'] = make_pair(vector<char>({'a', 'b', 'c'}), false);
+	g['h'] = make_pair(vector<char>({}), false);
+	g['i'] = make_pair(vector<char>({'c'}), false);
+	g['j'] = make_pair(vector<char>({'e'}), false);
+
+	stack<char> s;
+	topological_order(g, s);
+	while (s.empty() == false) { 
+        cout << s.top() << " "; 
+        s.pop(); 
+    }
 
 	/*for (int i = 0; i < l.size(); ++i){
 		cout << "GRAPH #" << i << endl;
