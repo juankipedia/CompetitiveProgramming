@@ -7,6 +7,7 @@ template <class T> class Graph : public unordered_map<T, pair<vector<T>, bool> >
 		~Graph(){} 
 };
 
+//############################################# dfs###############################################
 template <class T, class Function> void __dft(const T &n, Graph<T> &g, const Function &f){
 	if(g[n].second)
 		return;
@@ -21,6 +22,7 @@ template <class T, class Function> void dft(Graph<T> & g, const Function &f){
 		else __dft<T, Function>(n.first, g, f);
 }
 
+//############################################# bfs###############################################
 template <class T, class Function> void bft(const T &n, Graph<T> &g, const Function &f){
 	queue <T> q;
 	g[n].second = true;
@@ -37,6 +39,8 @@ template <class T, class Function> void bft(const T &n, Graph<T> &g, const Funct
 		}
 	}
 }
+
+//######################################Path Between 2 vertices ###################################
 
 template <class T> bool __dft_path(const T &n, const T &e, Graph<T> &g, vector<T> &p){
 	if(g[n].second)
@@ -61,6 +65,7 @@ template <class T> vector<T> dft_path(const T &b, const T &e, Graph<T> & g){
 	return p;
 }
 
+//############################# Minimal Path Between 2 vertices ###################################
 
 template <class T> bool __minimal_path(const T &n, const T &e, Graph<T> &g, const T &d_val, unordered_map<T, T> &parents){
 	queue <T> q;
@@ -86,6 +91,7 @@ template <class T> bool __minimal_path(const T &n, const T &e, Graph<T> &g, cons
 	return false;
 }
 
+
 template <class T> vector<T> minimal_path(const T &n, const T &e, Graph<T> &g, const T &d_val){
 	vector<T> p;
 	unordered_map<T, T> parents;
@@ -99,6 +105,8 @@ template <class T> vector<T> minimal_path(const T &n, const T &e, Graph<T> &g, c
 	}
 	return p;
 }
+
+//##################################### obtain all subgraphs ######################################
 
 template <class T> void __copy(const T &n, Graph<T> &g, Graph<T> &s_g){
 	if(g[n].second)
@@ -122,13 +130,21 @@ template <class T> void split(Graph<T> & g, vector<Graph<T> > &l){
 		}
 }
 
-
+//##################################### Ordered Graph Class #######################################
 template <class T> class O_graph : public map<T, pair<vector<T>, bool> >{
 	public:
 		O_graph(){}
 		~O_graph(){} 
 };
 
+//################################### Mark All elements as Unseen ##################################
+template <class T> void mark_unseen(O_graph<T> &g){
+	for(pair<const T, pair<vector<T>, bool> > &n : g)
+		n.second.second = false;
+}
+
+
+//##################################### Get Topological Ordering ###################################
 template <class T> void __dft_topological(const T &n, O_graph<T> &g, stack<T> &t_o){
 	if(g[n].second) return;
 	g[n].second = true;
@@ -144,6 +160,16 @@ template <class T> void topological_order(O_graph<T> & g, stack<T> &t_o){
 
 
 int main(){
+
+	O_graph<int> g;
+	g[0] = make_pair(vector<int>({2, 3}), false);
+	g[1] = make_pair(vector<int>({0}), false);
+	g[2] = make_pair(vector<int>({1}), false);
+	g[3] = make_pair(vector<int>({4}), false);
+	g[4] = make_pair(vector<int>({}), false);
+
+	mark_unseen(g);
+
 	/*Graph<unsigned int> g;
 	unsigned int k = 0;
 	g[1] = make_pair(vector<unsigned int>({2, 3}), false);
@@ -159,7 +185,7 @@ int main(){
 	g[11] = make_pair(vector<unsigned int>({12, 13}), false);
 	g[12] = make_pair(vector<unsigned int>({11}), false);
 	g[13] = make_pair(vector<unsigned int>({11}), false);*/
-	O_graph<char> g;
+	/*O_graph<char> g;
 	g['a'] = make_pair(vector<char>({'b', 'f'}), false);
 	g['b'] = make_pair(vector<char>({'h'}), false);
 	g['c'] = make_pair(vector<char>(), false);
@@ -176,7 +202,7 @@ int main(){
 	while (s.empty() == false) { 
         cout << s.top() << " "; 
         s.pop(); 
-    }
+    }*/
 
 	/*for (int i = 0; i < l.size(); ++i){
 		cout << "GRAPH #" << i << endl;
