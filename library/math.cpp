@@ -1,11 +1,12 @@
 # include <bits/stdc++.h>
 using namespace std;
 
+//######################################### Gratest Common Divisor ##############################################
 int gcd(int a, int b){
 	if(b == 0) return a;
 	return gcd(b, a % b);
 }
-//###############################################################################################################
+//######################################### Fibonacci ###########################################################
 constexpr long long unsigned int M = 1000007ll;
 std::map<long long unsigned int, long long unsigned int> Found_F{ { 0, 1 }, { 1, 1 } };
 
@@ -21,7 +22,7 @@ long long unsigned int Fib(long long unsigned int n){
 long long unsigned int Fibonacci(long long unsigned int n){
     return n == 0 ? 0 : Fib(n - 1);
 }
-//###############################################################################################################
+//######################################### Power ################################################################
 template<typename T>
 T pow(T n, T e){
     T res { 1 };
@@ -33,7 +34,7 @@ T pow(T n, T e){
     }
     return res;
 }
-//################################################################################################################
+//####################################### Power with Mod ##########################################################
 template <typename T>
 T modpow(T n, T e, T m) {
   n %= m;
@@ -45,7 +46,7 @@ T modpow(T n, T e, T m) {
   }
   return result;
 }
-//################################################################################################################
+//######################################### Check if Number Is Prime ##############################################
 bool is_prime(int n) {
     if (n == 1)
         return false;
@@ -57,6 +58,12 @@ bool is_prime(int n) {
     }
     return true;
 }
+//################################################ Combination #####################################################
+int combination(int n, int k) { 
+  if (k==0 || k==n) return 1; 
+  return  combination(n-1, k-1) + combination(n-1, k); 
+}
+
 int main(){
 
 	return 0;
