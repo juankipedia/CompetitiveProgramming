@@ -19,7 +19,40 @@ typedef unordered_set<long long int> u_s_lli;
 typedef unordered_set<unsigned int> u_s_ui;
 typedef unordered_set<unsigned long long int> u_s_ulli;
 
-int main() {
+pair<ui, ui> pi;
+set<pair<ui,ui> > ps;
 
+void in(){
+	for(const auto &p : ps)
+		if((pi.first <= p.first and pi.second <= p.second) or (pi.first <= p.second and pi.second <= p.first))
+			return;
+	ps.insert(move(pi));
+	return;
+}
+
+void in_w(){
+	for(const auto &p : ps){
+		if((pi.first >= p.first and pi.second >= p.second) or (pi.first >= p.second and pi.second >= p.first))
+			continue;
+		else{
+			cout << "NO\n";
+			return;
+		}
+	}
+	cout << "YES\n";
+	return;
+}
+
+int main() {
+	io_boost
+	int n;
+	cin >> n;
+	char q;
+	ui x, y, x_m = 0, y_m = 0;
+	while(n--){
+		cin >> q >> pi.first >> pi.second;
+		if(q == '+') in();
+		else in_w();
+	}
     return 0;
 }

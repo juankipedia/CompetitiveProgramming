@@ -20,6 +20,23 @@ typedef unordered_set<unsigned int> u_s_ui;
 typedef unordered_set<unsigned long long int> u_s_ulli;
 
 int main() {
+	io_boost
+	int n, k, m = -1, e_t = 0, s_t = 0;
+	cin >> n >> k;
+	int t[n];
+	for (int i = 0; i < n; ++i){
+		cin >> t[i];
+		if(t[i] == 1)
+			e_t ++;
+		else
+			s_t ++;
+	}
 
+	for (int j = 0; j < k; ++j){
+		int e = e_t, s = s_t;
+		for (int i = j; i < n; i += k) if(t[i] == 1) e--; else s--;
+		m = max(m, abs(e - s)); 
+	}
+	cout << m << endl;
     return 0;
 }
