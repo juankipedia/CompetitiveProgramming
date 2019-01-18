@@ -36,6 +36,8 @@ CodeGym/03 -> Union-Find Disjoint Sets.
 * COJ
 * UVa
 * TopCoder
+* Codeforces
+* Spoj
 
 ## Reference
 * Competitive Programming, Steven & Felix.
