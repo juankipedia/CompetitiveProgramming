@@ -64,6 +64,17 @@ int combination(int n, int k) {
   return  combination(n-1, k-1) + combination(n-1, k); 
 }
 
+//################################################ Combination iterative ############################################
+int nCr_mod_M(int n, int r, int MOD){ 
+    int C[r+1]; 
+    memset(C, 0, sizeof(C)); 
+    C[0] = 1; 
+    for (int i = 1; i <= n; i++) { 
+        for (int j = min(i, r); j > 0; j--) 
+            C[j] = (C[j] + C[j-1])%MOD; 
+    } 
+    return C[r]; 
+} 
 
 int main(){
 
