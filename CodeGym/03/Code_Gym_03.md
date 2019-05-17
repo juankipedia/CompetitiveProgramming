@@ -77,7 +77,7 @@ vector<int> pset(1000);
 
 void initSet(int _size){ 
 	pset.resize(_size); 
-	for(size_t i = 0; i < size; i++) 
+	for(size_t i = 0; i < _size; i++) 
 		pset[i] = i; 
 }
 
