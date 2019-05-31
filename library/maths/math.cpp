@@ -64,6 +64,17 @@ int combination(int n, int k) {
   return  combination(n-1, k-1) + combination(n-1, k); 
 }
 
+
+ulli binomialCoeff(ulli n, ulli k){ 
+    ulli C[k+1] = {0}; 
+    C[0] = 1;
+    for (ulli i = 1; i <= n; i++){ 
+        for (ulli j = min(i, k); j > 0; j--) 
+            C[j] = C[j] + C[j-1]; 
+    } 
+    return C[k]; 
+} 
+
 //################################################ Combination iterative ############################################
 int nCr_mod_M(int n, int r, int MOD){ 
     int C[r+1]; 
