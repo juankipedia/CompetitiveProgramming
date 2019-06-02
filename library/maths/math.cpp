@@ -64,18 +64,7 @@ int combination(int n, int k) {
   return  combination(n-1, k-1) + combination(n-1, k); 
 }
 
-
-ulli binomialCoeff(ulli n, ulli k){ 
-    ulli C[k+1] = {0}; 
-    C[0] = 1;
-    for (ulli i = 1; i <= n; i++){ 
-        for (ulli j = min(i, k); j > 0; j--) 
-            C[j] = C[j] + C[j-1]; 
-    } 
-    return C[k]; 
-} 
-
-//################################################ Combination iterative ############################################
+//################################################ Combination iterative with modulo ###############################
 int nCr_mod_M(int n, int r, int MOD){ 
     int C[r+1]; 
     memset(C, 0, sizeof(C)); 
@@ -85,6 +74,17 @@ int nCr_mod_M(int n, int r, int MOD){
             C[j] = (C[j] + C[j-1])%MOD; 
     } 
     return C[r]; 
+} 
+
+//############################################## Combination iterative ##############################################
+ulli binomialCoeff(ulli n, ulli k){ 
+    ulli C[k+1] = {0}; 
+    C[0] = 1;
+    for (ulli i = 1; i <= n; i++){ 
+        for (ulli j = min(i, k); j > 0; j--) 
+            C[j] = C[j] + C[j-1]; 
+    } 
+    return C[k]; 
 } 
 
 //############################################## Print All Divisors #################################################
@@ -98,6 +98,19 @@ void printDivisors(int n){
         } 
     } 
 } 
+
+//############################################# al primes from 2 to n ################################################
+
+void sieve_of_eratosthenes(n){
+  int sieve[n] = {0};
+  for (int x = 2; x <= n; x++) {
+    if (sieve[x]) continue;
+    for (int u = 2*x; u <= n; u += x) {
+      sieve[u] = x;
+    }
+  }
+}
+
 
 int main(){
 
