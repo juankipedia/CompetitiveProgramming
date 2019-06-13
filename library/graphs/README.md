@@ -34,7 +34,7 @@ A group of edges that connects two set of vertices in a graph is called cut in g
 
 ## bellman_ford.cpp
 
-Given a graph and a source vertex source in graph, find shortest paths from src to all vertices in the given graph. The graph may contain negative weight edges.
+Given a graph and a source vertex in graph, find shortest paths from src to all vertices in the given graph. The graph may contain negative weight edges.
 
 ## dijkstra.cpp
 
