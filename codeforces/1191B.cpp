@@ -5,41 +5,36 @@ using namespace std;
 # define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
 
-int main() {
-	vector<string> t; t.push_back(""); t.push_back(""); t.push_back("");
-	cin >> t[0] >> t[1] >> t[2];
-	if(t[0] == t[1] and t[1] == t[2]){
-		cout << 0 << endl;
-		return 0;
-	}
-
-	sort(t.begin(), t.end());
-	if(t[0][1] == t[1][1] and t[1][1] == t[2][1] and t[0][0] + 1 == t[1][0] and t[1][0] + 1 == t[2][0]){
-		cout << 0 << endl;
-		return 0;
-	}
-
-	sort(t.begin(), t.end(), [](string &A, string &B){
-		return A[1] < B[1];
-	});
-
-	if(t[0][1] == t[1][1]){
-		if(t[0][0] + 1 == t[1][0] or t[0][0] == t[1][0] + 1 or t[0][0] == t[1][0] or
-			t[0][0] + 2 == t[1][0] or t[0][0] == t[1][0] + 2
-			)
-			cout << 1 << endl;
-		else 
-			cout << 2 << endl;
-	}
-	else if(t[1][1] == t[2][1]){
-		if(t[1][0] + 1 == t[2][0] or t[1][0] == t[2][0] + 1 or t[1][0] == t[2][0] or
-			t[1][0] + 2 == t[2][0] or t[1][0] == t[2][0] + 2
-			)
-			cout << 1 << endl;
-		else 
-			cout << 2 << endl;
-	}
-	else
-		cout << 2<< endl;
+int main(){
+    string s[4];
+    vector<int> v[4];
+    for(int i = 1;i<=3;i++){
+        cin>>s[i];
+        if(s[i][1]=='s'){
+            v[1].push_back(s[i][0]-'0');
+        }
+        if(s[i][1]=='m'){
+            v[2].push_back(s[i][0]-'0');
+        }
+        if(s[i][1]=='p'){
+            v[3].push_back(s[i][0]-'0');
+        }
+    }
+    int ans = 2;
+    for(int i = 1;i<=3 ;i++){
+        int len = v[i].size();
+        sort(v[i].begin(),v[i].end());
+        if(len==1) continue;
+        if(len ==2){
+            if(v[i][0]==v[i][1]||v[i][0]==v[i][1]-1||v[i][0]==v[i][1]-2) ans = 1;
+        }
+        if(len == 3){
+            if((v[i][0]==v[i][1]&&v[i][2]==v[i][1])||(v[i][0]==v[i][1]-1&&v[i][1]==v[i][2]-1)) ans  = 0;
+            else if((v[i][0]==v[i][1]||v[i][2]==v[i][1])||(v[i][0]==v[i][1]-1||v[i][1]==v[i][2]-1)||v[i][0]==v[i][1]-2||v[i][1]==v[i][2]-2){
+                ans = 1;
+            }
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }
