@@ -18,42 +18,83 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
+typedef std::numeric_limits< double > dbl;
 
-int n;
+int n, m, l;
+bool lb[1001];
+bool lbi[1001];
+int b, k;
+vector<int> s[1001];
 
-void SieveOfEratosthenes() { 
+bool equal(){
+	for (int i = 0; i < m; ++i){
+		if(lb[i] != lbi[i])
+			return false;	
+	}
 
-    bool prime[n+1]; 
-    memset(prime, true, sizeof(prime)); 
-  
-    for (int p=2; p*p<=n; p++) 
-    { 
-        if (prime[p] == true) { 
-            for (int i=p*p; i<=n; i += p) 
-                prime[i] = false; 
-        } 
-    } 
+	return true;
+}
 
+bool all_off(){
+	for (int i = 0; i < m; ++i){
+		if(lb[i])
+			return false;	
+	}
 
-    for (int i = 2, j = n - 1; i <= n / 2;){ 
-    	
-        if (prime[i] and prime[j] and (i + j) == n){ 
-            cout << i << " " << j << endl; 
-            return; 
-        } 
-        else if(prime[i] and prime[j]){
-        	i++; j++;
-        }
-        if(not prime[j]) j--;
-        if(not prime[i]) i++;
-    }
-
-    cout << -1 << endl; 
-} 
-
+	return true;
+}
 
 int main() {
-	cin >> n;
-	SieveOfEratosthenes();
+	cin >> n >> m;
+	cin >> l;
+	for (int i = 0; i < l; ++i){
+		cin >> b;
+		lb[b - 1] = true;
+		lbi[b - 1] = true;
+	}
+
+
+
+	ui c = 0;
+	bool f = false;
+	ui r = c;
+	for (int i = 0; i < n; ++i){
+		cin >> k;
+		for (int j = 0; j < k; ++j){
+			cin >> b;
+			s[i].push_back(b -  1);
+			lb[b - 1] = !lb[b - 1];
+		}
+		c++;
+		if(all_off() and not f){
+			f = true;
+			r = c;
+		}
+
+	}
+	if(f) {
+		cout << r << endl;
+		return 0;
+	}
+	while(not equal()){
+		for (int i = 0; i < n; ++i){
+			for (const int &e : s[i]){
+				lb[e] = !lb[e];
+			}
+			c++;
+			if(all_off()){
+				cout << c << endl;
+				return 0;
+			}
+		}
+
+		if (equal()){
+			cout << -1 << endl;
+			return 0;
+		}
+
+	}
+
+	cout << -1 << endl;
     return 0;
 }

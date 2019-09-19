@@ -18,26 +18,50 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
-typedef std::numeric_limits< double > dbl;
 
-const int MAXN = 100; 
-
-int t, n, m;
-ui ai, bi;
+int q,  n;
+ulli sp;
 
 int main() {
-	cin >> t;
-	while(t --){
-		cin >> n >> m;
-		for (int i = 0; i < n; ++i)
-			cin >> ai;
+	cin >> q;
+	while(q --){
+		cin >> n;
+		vector<int> s;
+		bool f = false;
+		for (int i = 0; i < n; ++i){
+			cin >> sp;
+			if(sp < 2048) s.push_back(log2(sp));
+			else if(sp == 2048) f = true;
+		}
+		if(f){
+			cout << "YES" << endl;
+			continue;
+		}
 
-		for (int i = 0; i < m; ++i)
-			cin >> bi;
-		
+		bool v[11] = {false};
+		for (int i = 0; i < s.size(); ++i){
+			if(v[s[i]]){
+				for (int j = s[i]; j < 11; ++j){
+					if(v[j]){
+						v[j] = false;
+						if(j == 10){
+							f = true;
+							break;
+						}
+					}
+					else{
+						v[j] = true;
+						break;
+					}
+				}
+			}
+			else v[s[i]] = true;
 
-		if(n <= m) cout << "Yes" << endl;
-		else cout << "No" << endl;
+			if(f) break;
+		}
+
+		if(f) cout << "YES" << endl;
+		else cout << "NO" << endl;
 	}
     return 0;
 }

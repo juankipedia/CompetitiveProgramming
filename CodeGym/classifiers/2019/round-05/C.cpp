@@ -18,26 +18,42 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
-typedef std::numeric_limits< double > dbl;
 
-const int MAXN = 100; 
+int n;
 
-int t, n, m;
-ui ai, bi;
+void SieveOfEratosthenes() { 
+
+    bool prime[n+1]; 
+    memset(prime, true, sizeof(prime)); 
+  
+    for (int p=2; p*p<=n; p++) 
+    { 
+        if (prime[p] == true) { 
+            for (int i=p*p; i<=n; i += p) 
+                prime[i] = false; 
+        } 
+    } 
+
+
+    for (int i = 2, j = n - 1; i <= n / 2;){ 
+    	
+        if (prime[i] and prime[j] and (i + j) == n){ 
+            cout << i << " " << j << endl; 
+            return; 
+        } 
+        else if(prime[i] and prime[j]){
+        	i++; j++;
+        }
+        if(not prime[j]) j--;
+        if(not prime[i]) i++;
+    }
+
+    cout << -1 << endl; 
+} 
+
 
 int main() {
-	cin >> t;
-	while(t --){
-		cin >> n >> m;
-		for (int i = 0; i < n; ++i)
-			cin >> ai;
-
-		for (int i = 0; i < m; ++i)
-			cin >> bi;
-		
-
-		if(n <= m) cout << "Yes" << endl;
-		else cout << "No" << endl;
-	}
+	cin >> n;
+	SieveOfEratosthenes();
     return 0;
 }

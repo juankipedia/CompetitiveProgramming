@@ -18,26 +18,12 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
-typedef std::numeric_limits< double > dbl;
 
-const int MAXN = 100; 
-
-int t, n, m;
-ui ai, bi;
+int x,y;
 
 int main() {
-	cin >> t;
-	while(t --){
-		cin >> n >> m;
-		for (int i = 0; i < n; ++i)
-			cin >> ai;
-
-		for (int i = 0; i < m; ++i)
-			cin >> bi;
-		
-
-		if(n <= m) cout << "Yes" << endl;
-		else cout << "No" << endl;
-	}
+	cin >> x >> y;
+	if(x>=y) cout << 1 << endl;
+	else cout << 0 << endl;
     return 0;
 }

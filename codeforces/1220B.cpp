@@ -18,24 +18,23 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
-typedef std::numeric_limits< double > dbl;
-string m, w;
-bool f;
-ui r;
+
+int n;
+lli M[1000][1000];
 int main() {
-	cin >> m >> w;
-	for (int i = 0; i < m.length() - w.length() + 1; ++i){
-		f = true;
-		for (int j = 0, k = i; j < w.length(); ++j, k++){
-			//cout << m[k] << " ";
-			if(m[k] == w[j]){
-				f = false;
-				break;
-			}
+	cin >> n;
+	for (int i = 0; i < n; ++i){
+		for (int j = 0; j < n; ++j){
+			cin >> M[i][j];
 		}
-		//cout << endl;
-		if(f) r ++;
 	}
-	cout << r << endl;
+
+	int a1 = sqrt(M[0][2] * M[0][1] / M[2][1]);
+	cout << a1 << " ";
+	for (int i = 1; i < n; ++i){
+		cout << M[0][i] / a1 << " ";
+	}
+
+	cout << endl;
     return 0;
 }
