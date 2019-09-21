@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 # define endl "\n"
 # define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 typedef unsigned long long int ulli;
@@ -18,12 +18,12 @@ typedef unordered_set<int> u_set_i;
 typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
-
+ 
 int T, tc;
 string A, B;
 int memo[2001][2001];
 int case_memo[2001][2001];
-
+ 
 int f(int i, int j){
 	if(i >= A.length() and j >= B.length()) return 0; // end
 	
@@ -35,24 +35,24 @@ int f(int i, int j){
 		memo[i][j] = 1 + f(i, j + 1);
 		return memo[i][j];
 	}
-
+ 
 	//delete from A <=> insert on B
 	if(j == B.length()){
 		memo[i][j] =  1 + f(i + 1, j); 
 		return memo[i][j];
 	}
-
+ 
 	//no operation needed
 	if(A[i] == B[j]){
 		memo[i][j] = f(i + 1, j + 1); 
 		return memo[i][j];
 	}
-
+ 
 	// min between delete from A/insert on B   and    delete from B/insert on A
 	memo[i][j] = min(min(1 + f(i + 1, j), 1 + f(i, j + 1)), 1 + f(i + 1, j + 1)); 
 	return memo[i][j];
 }
-
+ 
 int main() {
 	cin >> T;
 	for (tc = 1; tc <= T ; ++tc){
@@ -66,4 +66,4 @@ int main() {
 		}*/
 	}
 	return 0;
-}
+} 
