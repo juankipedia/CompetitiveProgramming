@@ -19,7 +19,34 @@ typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
 
-int main() {
+int T, p;
+string t; 
 
+int main() {
+    io_boost;
+    cin >> T;
+    while(T--){
+        cin >> t;
+        p = 1;
+        for(int i = 1; i < t.size(); i++){
+            if(t[i] != t[i - 1]){
+                p = 2; break;
+            }
+        }
+        if(p == 1) cout << t << endl;
+        else{
+            cout << t[0];
+            for(int i = 1; i < t.size(); i++){
+                if(t[i] == t[i - 1]){
+                    if(t[i - 1] == '1') cout << 0;
+                    else cout << 1;
+                    cout << t[i];
+                }
+                else cout << t[i];
+            }
+            cout << endl;
+        }
+        
+    }
     return 0;
 }

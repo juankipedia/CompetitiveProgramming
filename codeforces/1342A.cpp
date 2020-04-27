@@ -19,7 +19,28 @@ typedef unordered_set<long long int> u_set_lli;
 typedef unordered_set<unsigned int> u_set_ui;
 typedef unordered_set<unsigned long long int> u_set_ulli;
 
-int main() {
+int t;
+ulli a, b, x, y;
 
+int main() {
+    io_boost;
+    cin >> t;
+    while(t--){
+        cin >> x >> y;
+        cin >> a >> b;
+        if(x == 0 && y == 0)
+            cout << 0 << endl;
+        else{
+            ulli r = 0;
+            ulli w = max(x, y);
+            w = w - min(x, y);
+            r += w * a;
+            w = min(x, y);
+            r += w  * min(b, a * 2);
+            cout << r << endl;
+
+        }
+        
+    }
     return 0;
 }
