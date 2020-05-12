@@ -1,53 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int t[1000000],last[1000001];
-int ans[1000000];
-set< pair<int, int> > S;
-set< pair<int, int> > :: iterator it;
+# define endl "\n"
+
+int t[1000000], p[1000001], ans[1000000], T, N, M;
+
+set<pair<int, int>> :: iterator it;
 
 int main(){
-    int T,n,m;
-    
-    scanf("%d",&T);
-    
+    cin >> T;
     while(T--){
-        scanf("%d %d",&n,&m);
+        cin >> N >> M;
         
-        for(int i = 0;i < m;++i)
-            scanf("%d",&t[i]);
+        for(int i = 0; i < M; ++i) cin >> t[i];
         
-        S.clear();
+        set<pair<int, int>> s;
         int cont = 0;
-        bool ok = true;
-        memset(last,-1,sizeof last);
+        bool f = false;
+        memset(p, -1, sizeof p);
         
-        for(int i = 0;i < m && ok;++i){
+        for(int i = 0;i < M;++i){
             if(t[i] == 0){
                 ans[cont] = 0;
-                S.insert(make_pair(i,cont++));
+                s.insert(make_pair(i, cont++));
             }else{
-                it = S.lower_bound(make_pair(last[ t[i] ],0));
+                it = s.lower_bound(make_pair(p[ t[i] ],0));
                 
-                if(it == S.end()) ok = false;
+                if(it == s.end()){f = true; break;}
                 else{
                     ans[it->second] = t[i];
-                    last[ t[i] ] = i;
-                    S.erase(it);
+                    p[t[i]] = i;
+                    s.erase(it);
                 }
             }
         }
         
-        if(!ok) puts("NO");
+        if(f) cout << "NO" << endl;
         else{
-            puts("YES");
-            
+            cout << "YES" << endl;
             for(int i = 0;i < cont;++i){
-                if(i) putchar(' ');
-                printf("%d",ans[i]);
+                if(i) cout << " ";
+                cout << ans[i];
             }
-            
-            putchar('\n');
+            cout << endl;
         }
     }
     
