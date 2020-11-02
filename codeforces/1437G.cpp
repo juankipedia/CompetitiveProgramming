@@ -7,16 +7,21 @@ typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
 
-const int TRIE_LEN = 2000005; // Dictionary size * length of words
+const int MAXN = 300005; // Dictionary size * length of words
 
-int n;
+int n, m, type, in;
+lli  x;
 vector<string> dictionary;
 string w;
 
 vector<string> queries; // in case of single query replace this with a single string
 
-int trie[TRIE_LEN][26], nodes = 1, failure[TRIE_LEN], fail_out[TRIE_LEN];
-bool end_word[TRIE_LEN];
+int trie[MAXN][26], nodes = 1, failure[MAXN], fail_out[MAXN];
+multiset<lli> end_word[MAXN];
+int end_node[MAXN];
+lli suspicion[MAXN];
+
+
 
 void build_bfs(){
     queue<int> q;
@@ -32,7 +37,7 @@ void build_bfs(){
                     while(failure[v] && !trie[failure[v]][i])
                         failure[v] = failure[failure[v]];
                     failure[v] = trie[failure[v]][i];
-                    fail_out[v] = end_word[failure[v]] ? failure[v] : fail_out[failure[v]];
+                    fail_out[v] = end_word[failure[v]].size() ? failure[v] : fail_out[failure[v]];
                 }
             }   
         }
@@ -40,43 +45,65 @@ void build_bfs(){
 }
 
 void build(){
-    for(auto & s : dictionary){
+    for(int i = 0; i < n; i++){
+        auto &s = dictionary[i];
         int cur = 0;
         for(char c: s){
             int cc = c - 'a';
             if(!trie[cur][cc]) trie[cur][cc] = nodes++;
             cur = trie[cur][cc]; 
         }
-        end_word[cur] = true;
+        end_word[cur].insert(0);
+        end_node[i] = cur;
     }
     build_bfs();
 }
 
-// in case of single query we can iterate over the single query, instead of passing the index of the query.
 
-void check(int i){
+lli check(string &s){
     int cur = 0;
-    for(char c : queries[i]){
+    lli ans = -1;
+    for(char c : s){
         int cc = c - 'a';
 
         while(cur && !trie[cur][cc]) cur = failure[cur];
         cur = trie[cur][cc];
 
         int f = fail_out[cur];
+        lli maxi = end_word[cur].size() ? *end_word[cur].rbegin() : -1;
         while(f){
-            // do something
+            maxi = max(maxi, end_word[f].size() ? *end_word[f].rbegin() : -1);
             f = fail_out[f];
         }
-        //do something
+
+        ans = max(maxi, ans);
     }
 
-    return;
+    return ans;
 }
 
 
 int main(){
-    // input dictionary
-    // input query
+    io_boost;
+    cin >> n >> m;
+    for(int i = 0; i < n; i++) cin >> w, dictionary.push_back(w);
     build();
+    for(int i = 0; i < m; i++){
+        cin >> type;
+        if(type == 1){
+            cin >> in >> x;
+            in --;
+            auto it = end_word[end_node[in]].find(suspicion[in]);
+            if(it != end_word[end_node[in]].end())
+                end_word[end_node[in]].erase(it);
+            suspicion[in] = x;
+            end_word[end_node[in]].insert(suspicion[in]);
+        }
+        else{
+            cin >> w;
+            cout << check(w) << endl;
+        }
+    }
+
     return 0;
 }
