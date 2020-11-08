@@ -12,7 +12,7 @@ const int TRIE_LEN = 400005; // Dictionary size * length of words
  
 
 vector<string> dictionary;
-
+string txt;
 int trie[TRIE_LEN][26], nodes = 1, failure[TRIE_LEN], fail_out[TRIE_LEN];
 bool end_word[TRIE_LEN];
  
@@ -47,7 +47,21 @@ void build(){
     }
     build_bfs();
 }
-  
+
+void check(){
+    int cur = 0;
+    for(char c : txt){
+        int cc = c - 'a';
+        cur = trie[cur][cc];
+        int f = cur;
+        while(f){
+            // do something
+            f = fail_out[f];
+        }
+        //do something
+    }
+}
+
 int main(){
     io_boost;
     return 0;
