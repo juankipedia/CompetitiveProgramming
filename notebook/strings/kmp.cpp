@@ -22,33 +22,29 @@ void LPS(){
 }
 
 int main(){
-    cin >> t;
-    while(t--){
-        io_boost;
-        cin >> txt >> p;
-        LPS();
-        vector<int> ans;
-        int i = 0, j = 0;
-        while(i < txt.size()){
-            if(txt[i] == p[j]){j++; i++;}
-            if(j == p.size()){
-                ans.push_back(i - j + 1);
-                j = lps[j - 1];
-            }
-            else if(i < txt.size() && p[j] != txt[i]){
-                if(j != 0) j = lps[j - 1];
-                else i++;
-            }
+    io_boost;
+    cin >> txt >> p;
+    LPS();
+    vector<int> ans;
+    int i = 0, j = 0;
+    while(i < txt.size()){
+        if(txt[i] == p[j]){j++; i++;}
+        if(j == p.size()){
+            ans.push_back(i - j + 1);
+            j = lps[j - 1];
         }
-        if(ans.size() == 0){
-            cout << "Not Found" << endl;
+        else if(i < txt.size() && p[j] != txt[i]){
+            if(j != 0) j = lps[j - 1];
+            else i++;
         }
-        else{
-            cout << ans.size() << endl;
-            for(int pos : ans) cout << pos << " ";
-            cout << endl;
-        }
-        if(t) cout << endl;
+    }
+    if(ans.size() == 0){
+        cout << "Not Found" << endl;
+    }
+    else{
+        cout << ans.size() << endl;
+        for(int pos : ans) cout << pos << " ";
+        cout << endl;
     }
     return 0;
 }
