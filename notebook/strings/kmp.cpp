@@ -16,7 +16,7 @@ void LPS(){
     int n = p.size(), j = 1, i = 0;
     while(j < n){
         if(p[j] == p[i]) lps[j++] = ++i;
-        else if( i == 0) lps[j++] = 0;
+        else if(i == 0) lps[j++] = 0;
         else i = lps[i - 1];
     }
 }
