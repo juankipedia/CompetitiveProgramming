@@ -5,7 +5,9 @@ using namespace std;
 # define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
 /**
- * Lowest common ancestor (LCA).
+ * Lowest common ancestor (LCA). Answring queries online
+ * 
+ * O(nlgn) in dfs function and O(lg(n)) per query.
  * 
  * We will find the LCA by lifting up each vertex until they find each other.
  * 
@@ -48,3 +50,48 @@ int lca(int u, int v){
             u = up[u][i], v = up[v][i];
     return up[u][0];
 }
+
+
+
+/**
+ * Lowest common ancestor (LCA). Answering queries offline.
+ * 
+ * We will find the LCA of each query using small to large strategy.
+ * 
+ **/
+
+const int MAXQ = 1000; // maximun number of queries.
+set<int> s[MAXN]; // For each node we stores queries related to it.
+int ans[MAXQ]; // ans[i] is the answer of query number i.
+
+void dfs(int u, int p){
+    for(int v: g[u]){
+        if(v == p) continue;
+        dfs(v, u);
+        if(s[v].size() > s[u].size()) swap(s[v], s[u]);
+        for(int q: s[v]){
+            if(s[u].count(q)){ // if set u has query q then lca for query q is u.
+                ans[q] = u;
+                s[u].erase(q);
+            }
+            else s[u].insert(q);
+        }
+    }
+}
+
+// function to store queries.
+void input_queries(){
+    int q;
+    cin >> q;
+    for(int i = 0, u, v; i < q; i++){
+        cin >> u >> v;
+        u--; v--;
+        if(u == v){
+            ans[i] = u;
+            continue;
+        }
+        s[u].insert(i);
+        s[v].insert(i);
+    }
+}
+
