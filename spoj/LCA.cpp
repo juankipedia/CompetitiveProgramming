@@ -6,31 +6,54 @@ using namespace std;
 
 const int MAXN = 1000;
 
-int t, N, M, q, ans[1000];
-vector<int> g[MAXN];
-set<int> s[MAXN];
+int t, N, M, q, first[MAXN], height[MAXN];
+vector<int> g[MAXN], a;
 
-void dfs(int u, int p){
+void dfs(int u, int p, int h){
+    height[u] = h;
+    first[u] = a.size();
+    a.push_back(u);
     for(int v: g[u]){
-        if(v == p) continue;
-        dfs(v, u);
-        if(s[v].size() > s[u].size()) swap(s[v], s[u]);
-        for(int q: s[v]){
-            if(s[u].count(q)){
-                ans[q] = u;
-                s[u].erase(q);
-            }
-            else s[u].insert(q);
+        if(v != p){
+            dfs(v, u, h + 1);
+            a.push_back(u);
+        }
+    }
+}   
+
+const int LOG2N = 11;
+int lg2[2 * MAXN + 1], st[2 * MAXN][LOG2N + 5];
+
+void build(){
+    dfs(0, 0, 0);
+    lg2[1] = 0;
+    for(int i = 2; i <= a.size(); i++) lg2[i] = lg2[i / 2] + 1;
+    for(int i = 0; i < a.size(); i++) st[i][0] = a[i];
+    for(int j = 1; j <= LOG2N; j++){
+        for(int i = 0; i + (1 << j) <= a.size(); i++){
+            int a = st[i][j - 1], b = st[i + (1 << (j - 1))][j - 1];
+            st[i][j] = height[a] < height[b] ? a : b;
         }
     }
 }
+
+int LCA(int u, int v){
+    int L = first[u], R = first[v];
+    if(L > R) swap(L, R); 
+    int lg = lg2[R - L + 1];
+    int l = st[L][lg], r = st[R - (1 << lg) + 1][lg];
+    if(height[l] < height[r]) return l;
+    else return r;
+}
+
 
 int main(){
     io_boost;
     cin >> t;
     for(int ti = 1; ti <= t; ti++){
         cin >> N;
-        for(int i = 0; i < N; i++) g[i] = {}, s[i].clear();
+        a.clear();
+        for(int i = 0; i < N; i++) g[i] = {};
         for(int i = 0, n; i < N; i++){
             cin >> n;
             for(int j = 0, v; j < n; j++){
@@ -40,20 +63,14 @@ int main(){
                 g[v].push_back(i);
             }
         }
+        build();
         cin >> q;
+        cout << "Case " << ti << ":" << endl;
         for(int i = 0, u, v; i < q; i++){
             cin >> u >> v;
             u--; v--;
-            if(u == v){
-                ans[i] = u;
-                continue;
-            }
-            s[u].insert(i);
-            s[v].insert(i);
+            cout << LCA(u, v) + 1 << endl;
         }
-        dfs(0, 0);
-        cout << "Case " << ti << ":" << endl;
-        for(int i = 0; i < q; i++) cout << ans[i] + 1 << endl;
     }   
     return 0;
 }

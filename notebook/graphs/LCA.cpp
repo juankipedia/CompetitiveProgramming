@@ -5,7 +5,7 @@ using namespace std;
 # define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
 /**
- * Lowest common ancestor (LCA). Answring queries online
+ * Lowest common ancestor (LCA). binary lifting
  * 
  * O(nlgn) in dfs function and O(lg(n)) per query.
  * 
@@ -52,46 +52,54 @@ int lca(int u, int v){
 }
 
 
-
 /**
- * Lowest common ancestor (LCA). Answering queries offline.
+ * Lowest common ancestor (LCA). euler tour + sparse table.
  * 
- * We will find the LCA of each query using small to large strategy.
+ * We will find the LCA of each query by building the euler tour and finding the verter with the minimun height
+ * in the segment [first[u], first[v]].  Which stores for each vertex v its first occurrence in euler tour.
  * 
  **/
 
-const int MAXQ = 1000; // maximun number of queries.
-set<int> s[MAXN]; // For each node we stores queries related to it.
-int ans[MAXQ]; // ans[i] is the answer of query number i.
+const int MAXN = 1000;
 
-void dfs(int u, int p){
+int t, N, M, q, first[MAXN], height[MAXN];
+vector<int> g[MAXN], a;
+
+void dfs(int u, int p, int h){
+    height[u] = h;
+    first[u] = a.size();
+    a.push_back(u);
     for(int v: g[u]){
-        if(v == p) continue;
-        dfs(v, u);
-        if(s[v].size() > s[u].size()) swap(s[v], s[u]);
-        for(int q: s[v]){
-            if(s[u].count(q)){ // if set u has query q then lca for query q is u.
-                ans[q] = u;
-                s[u].erase(q);
-            }
-            else s[u].insert(q);
+        if(v != p){
+            dfs(v, u, h + 1);
+            a.push_back(u);
+        }
+    }
+}   
+
+const int LOG2N = 11;
+int lg2[2 * MAXN + 1], st[2 * MAXN][LOG2N + 5];
+
+// CALL BUILD before asking for LCA.
+void build(){
+    dfs(0, 0, 0);
+    // Builds sparse table.
+    lg2[1] = 0;
+    for(int i = 2; i <= a.size(); i++) lg2[i] = lg2[i / 2] + 1;
+    for(int i = 0; i < a.size(); i++) st[i][0] = a[i];
+    for(int j = 1; j <= LOG2N; j++){
+        for(int i = 0; i + (1 << j) <= a.size(); i++){
+            int a = st[i][j - 1], b = st[i + (1 << (j - 1))][j - 1];
+            st[i][j] = height[a] < height[b] ? a : b;
         }
     }
 }
 
-// function to store queries.
-void input_queries(){
-    int q;
-    cin >> q;
-    for(int i = 0, u, v; i < q; i++){
-        cin >> u >> v;
-        u--; v--;
-        if(u == v){
-            ans[i] = u;
-            continue;
-        }
-        s[u].insert(i);
-        s[v].insert(i);
-    }
+int LCA(int u, int v){
+    int L = first[u], R = first[v];
+    if(L > R) swap(L, R); 
+    int lg = lg2[R - L + 1];
+    int l = st[L][lg], r = st[R - (1 << lg) + 1][lg];
+    if(height[l] < height[r]) return l;
+    else return r;
 }
-
