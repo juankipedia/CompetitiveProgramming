@@ -3,7 +3,7 @@
  *  We will ask you to perform the following operation:
  *      u - v : ask for how many different integers that represent the weight of nodes there are on the path from u to v.
  * 
- *  SOLUTION: Transform the tree in to an array using Euler tour path, apply mo's algorithm over the resulting array.
+ *  SOLUTION: Transform the tree in to an array using MODIFIED version of euler tour path, apply mo's algorithm over the resulting array.
  *  We have 2 cases, for a path u - v:
  *      1- if lca(u, v) != u && lca(u, v) != u, then the answer for the query is mos([out[u], in[v]] U {LCA(u, v)}).
  *      2- if lca(u, v) == u || lca(u, v) == v, then the answer for the query is mos([in[u], in[v]])
