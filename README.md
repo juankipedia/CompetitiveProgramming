@@ -2,11 +2,9 @@
 
 ## Contributors:
 * Juan Diego
-* Marco Sandoval
 
 ## Emails:
 * juandiegp17@gmail.com
-* kada9001@gmail.com
 
 ## Description:
 Exercises that has been solve on some competitive programming platforms and
