@@ -15,7 +15,7 @@ typedef unsigned int ui;
  * */
 
 const int MAXN = 100000;
-const lli oo = numeric_limits<lli>::max(); 
+const lli oo = numeric_limits<lli>::max();
 typedef pair<lli, int> p_lli_i;
 vector<p_lli_i> g[MAXN];
 
