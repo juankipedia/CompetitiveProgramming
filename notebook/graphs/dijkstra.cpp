@@ -5,6 +5,15 @@ typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
 
+/**
+ * DIJKSTRA.
+ * 
+ * E: number of edges.
+ * V: number of vertices.
+ * time complexity: O(E log(V))
+ * 
+ * */
+
 const int MAXN = 100000;
 const lli oo = numeric_limits<lli>::max(); 
 typedef pair<lli, int> p_lli_i;
