@@ -30,7 +30,7 @@ ulli pow(ulli n, ulli e){
  * 
  * GREATEST COMMON DIVISOR.
  * 
- * */
+ **/
 int gcd(int a, int b){
 	if(b == 0) return a;
 	return gcd(b, a % b);
@@ -40,7 +40,7 @@ int gcd(int a, int b){
  * CHECK WETHER A NUMBER IS PRIME.
  * 
  * All divisors of n are less than or equal to sqrt(n)
- * */
+ **/
 bool is_prime(int n){
     if (n == 1) return false;
     int i = 2;
