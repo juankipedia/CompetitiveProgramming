@@ -1,11 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-# define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
+
+
+/**
+ * 
+ * AHO CORASICK NO SIMPLIFIED AUTOMATON.
+ * 
+ * time complexity O(N sqrt(N)), but more than the simplified automaton.
+ *  
+ **/
 
 const int TRIE_LEN = 2000005; // Dictionary size * length of words
 
@@ -39,6 +46,7 @@ void build_bfs(){
     }
 }
 
+// call build before using the automaton
 void build(){
     for(auto & s : dictionary){
         int cur = 0;
@@ -59,7 +67,7 @@ void check(int i){
     for(char c : queries[i]){
         int cc = c - 'a';
 
-        while(cur && !trie[cur][cc]) cur = failure[cur];
+        while(cur && !trie[cur][cc]) cur = failure[cur]; // this while is the difference with the simplified one
         cur = trie[cur][cc];
 
         int f = fail_out[cur];
@@ -71,12 +79,4 @@ void check(int i){
     }
 
     return;
-}
-
-
-int main(){
-    // input dictionary
-    // input query
-    build();
-    return 0;
 }

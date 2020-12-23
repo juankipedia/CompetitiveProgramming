@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-# define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+
 typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
  
+/**
+ * 
+ * AHO CORASICK AUTOMATON.
+ * 
+ * time complexity O(|txt| + sum(|pattern_i| + matches).
+ * 
+ **/
  
 const int TRIE_LEN = 400005; // Dictionary size * length of words
  
-
 vector<string> dictionary;
 string txt;
 int trie[TRIE_LEN][26], nodes = 1, failure[TRIE_LEN], fail_out[TRIE_LEN];
@@ -60,9 +64,4 @@ void check(){
         }
         //do something
     }
-}
-
-int main(){
-    io_boost;
-    return 0;
 }

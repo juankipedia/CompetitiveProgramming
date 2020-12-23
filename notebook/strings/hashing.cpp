@@ -56,7 +56,3 @@ mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 ulli random(ulli a, ulli b){
     return uniform_int_distribution<ulli>(a, b)(rng);
 }
-
-int main(){
-    return 0;
-}
