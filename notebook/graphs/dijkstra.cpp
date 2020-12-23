@@ -8,6 +8,8 @@ typedef unsigned int ui;
 /**
  * DIJKSTRA.
  * 
+ * Find shortest path from source to all other vertices.
+ * 
  * E: number of edges.
  * V: number of vertices.
  * time complexity: O(E log(V))

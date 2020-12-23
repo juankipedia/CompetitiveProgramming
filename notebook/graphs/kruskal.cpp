@@ -9,7 +9,7 @@ typedef unsigned int ui;
  *
  * KRUSKAL
  * find minimum spanning tree.
- * time complexity: O(ElogV).
+ * time complexity: O(E log(V)).
  * 
  * */
 

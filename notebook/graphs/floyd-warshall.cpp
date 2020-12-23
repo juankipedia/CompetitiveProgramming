@@ -9,6 +9,8 @@ typedef unsigned int ui;
 /**
  * FLOYD WARSHALL.
  * 
+ * Find shortest paths between all possible pair of vertices.
+ * 
  * V: number of vertices.
  * time complexity: O(V^3)
  * 

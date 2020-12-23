@@ -9,7 +9,7 @@ typedef unsigned int ui;
  *
  * PRIM'S ALGORITHM
  * find Minimum Spanning Tree (MST).
- * Time complexity O(E logV)
+ * Time complexity O(E log(V))
  * 
  * */
 
