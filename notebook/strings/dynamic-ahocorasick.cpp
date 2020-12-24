@@ -6,6 +6,15 @@ using namespace std;
 typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui; 
+
+/**
+ * DYNAMIC AHO CORASICK
+ * As long as the trie of the aho corasick cannot be modified once it built, this code
+ * uses a technique to dynamize data structures that are not dynamic.
+ * The idea of this technique is to store several aho corasicks of size equals to a power of two
+ * and then the answer is the sum of the answer of all aho corasicks.
+ * 
+ * */
  
 const int TRIE_LEN = 300000; // Dictionary size * length of words
 const int LOG_TRIE_LEN = 20; // log2(TRIE_LEN)

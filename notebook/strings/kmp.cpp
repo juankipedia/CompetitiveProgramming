@@ -7,6 +7,12 @@ typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
 
+/**
+ *  KMP.
+ *  Find all occurrences of p in txt (pattern searching).
+ *  Time complexity: O(n)
+ **/
+
 int t;
 string txt, p;
 int lps[1000000];
@@ -38,13 +44,10 @@ int main(){
             else i++;
         }
     }
-    if(ans.size() == 0){
-        cout << "Not Found" << endl;
-    }
+    if(ans.size() == 0) cout << "Not Found" << endl;
     else{
         cout << ans.size() << endl;
         for(int pos : ans) cout << pos << " ";
-        cout << endl;
     }
     return 0;
 }
