@@ -8,7 +8,6 @@ typedef unsigned int ui;
 /**
  *
  * SEGMENT TREE.
- * segment tree for the sum with no lazy propagation.
  * O(log(N)) per query.
  * 
  * */
@@ -19,24 +18,32 @@ lli a[MAXN], st[3 * MAXN];
 
 # define R 2 * si + 2
 # define L 2 * si + 1
-# define M l + (r - l) / 2
+# define MID ss + (se - ss) / 2
+# define NEUTRAL 0
 
-lli build(int l, int r, int si){
-    if(l == r) return st[si] = a[l];
-    int mid = M;
-    return st[si] = build(l, mid, L) + build(mid + 1, r, R); 
+lli join(lli lval, lli rval){
+    return NEUTRAL;
 }
 
-lli get_sum(int l, int r, int si, int ql, int qr){
-    if(ql <= l && r <= qr) return st[si];
-    if(l > qr || r < ql) return 0;
-    int mid = M;
-    return get_sum(l, mid, L, ql, qr) + get_sum(mid + 1, r, R, ql, qr);   
+void build(int ss, int se, int si){
+    if(ss == se){
+        st[si] = a[ss];
+        return;
+    }
+    build(ss, MID, L);
+    build(MID + 1, se, R);
+    st[si] = join(st[L], st[R]); 
 }
 
-lli update(int l, int r, int si, int i, lli val){
-    if(l == r) return a[i] = st[si] = val;
-    int mid = M;
-    if(i <= mid) return st[si] = update(l, mid, L, i, val) + st[R];
-    else return st[si] = st[L] + update(mid + 1, r, R, i, val);
+
+lli get(int ss, int se, int si, int qs, int qe){
+    if(qs <= ss && se <= qe) return st[si];
+    if(ss > qe || se < qs) return NEUTRAL;
+    return join(get(ss, MID, L, qs, qe), get(MID + 1, se, R, qs, qe));   
+}
+
+lli update(int ss, int se, int si, int i, lli val){
+    if(ss == se) return a[i] = st[si] = val;
+    if(i <= MID) return st[si] = join(update(ss, MID, L, i, val), st[R]);
+    else return st[si] = join(st[L], update(MID + 1, se, R, i, val));
 }
