@@ -12,7 +12,7 @@ typedef unsigned int ui;
  * SEGMENT TREE FOR MASSIVE OPERATIONS WITH LAZY PROPAGATION
  *
  * REQUIRED:
- *      - propagate function needs to be completed
+ *      - operation
  *      - build
  *      - join
  * VARIABLES:
@@ -38,6 +38,10 @@ lli join(lli lval, lli rval){
     return NEUTRAL;
 }
 
+void operation(int si){
+
+}
+
 void build(int ss, int se, int si){
     if(ss == se){
         st[si] = a[ss];
@@ -50,7 +54,7 @@ void build(int ss, int se, int si){
 
 void propagate(int ss, int se, int si){
     if(!stb[si]) return;
-    // set the value of st[si]
+    operation(si);
     stb[si] = false;
     if(ss == se) return;
     sta[L] = sta[R] = sta[si];
