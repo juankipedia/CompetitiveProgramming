@@ -50,7 +50,7 @@ void build(int ss, int se, int si){
 
 void propagate(int ss, int se, int si){
     if(!stb[si]) return;
-    operation(ss, se, si);
+    operation(ss, se, si); // sets value for st[si].
     stb[si] = false;
     if(ss == se) return;
     sta[L] = sta[R] = sta[si];
