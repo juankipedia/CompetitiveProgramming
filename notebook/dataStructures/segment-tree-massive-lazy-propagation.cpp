@@ -21,7 +21,6 @@ typedef unsigned int ui;
  *   
  * */
 
-const lli oo = numeric_limits<lli>::max();
 const int MAXN = 100000;
 int N;
 lli st[3 * MAXN], sta[3 * MAXN], a[MAXN];
