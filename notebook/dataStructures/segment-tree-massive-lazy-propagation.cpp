@@ -11,7 +11,6 @@ typedef unsigned int ui;
  *
  * REQUIRED:
  *      - operation
- *      - build
  *      - join
  * VARIABLES:
  *      st[]: segment tree for the sum.
