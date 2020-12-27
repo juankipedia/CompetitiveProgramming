@@ -35,7 +35,7 @@ lli join(lli lval, lli rval){
     return NEUTRAL;
 }
 
-void operation(int si){
+void operation(int ss, int se, int si){
 
 }
 
@@ -51,7 +51,7 @@ void build(int ss, int se, int si){
 
 void propagate(int ss, int se, int si){
     if(!stb[si]) return;
-    operation(si);
+    operation(ss, se, si);
     stb[si] = false;
     if(ss == se) return;
     sta[L] = sta[R] = sta[si];
