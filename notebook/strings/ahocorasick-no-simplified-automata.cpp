@@ -10,7 +10,7 @@ typedef unsigned int ui;
  * 
  * AHO CORASICK NO SIMPLIFIED AUTOMATA.
  * 
- * time complexity O(N sqrt(N)), but more than the simplified automata.
+ * time complexity O(N sqrt(N)).
  *  
  **/
 
