@@ -8,9 +8,9 @@ typedef unsigned int ui;
 
 /**
  * 
- * AHO CORASICK NO SIMPLIFIED AUTOMATON.
+ * AHO CORASICK NO SIMPLIFIED AUTOMATA.
  * 
- * time complexity O(N sqrt(N)), but more than the simplified automaton.
+ * time complexity O(N sqrt(N)), but more than the simplified automata.
  *  
  **/
 
@@ -46,7 +46,7 @@ void build_bfs(){
     }
 }
 
-// call build before using the automaton
+// call build before using the automata
 void build(){
     for(auto & s : dictionary){
         int cur = 0;

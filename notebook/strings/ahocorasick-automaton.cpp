@@ -7,7 +7,7 @@ typedef unsigned int ui;
  
 /**
  * 
- * AHO CORASICK AUTOMATON.
+ * AHO CORASICK AUTOMATA.
  * 
  * time complexity O(|txt| + sum(|pattern_i| + matches).
  * 
@@ -27,7 +27,7 @@ void build_bfs(){
         int u = q.front(); q.pop();
         for(int i = 0; i < 26; i++){
             int v = trie[u][i];
-            // as long as there is no link to i and all links are defined for nodes above we must create the link of the automaton
+            // as long as there is no link to i and all links are defined for nodes above we must create the link of the automata
             // it means if the trie has not a child using i then we must create the link.
             if(!v) trie[u][i] = trie[failure[u]][i];
             else q.push(v);
