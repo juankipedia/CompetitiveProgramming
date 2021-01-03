@@ -9,6 +9,7 @@ typedef unsigned int ui;
  *
  * MATRIX EXPONENTIATION.
  * This file provides a fast way of calculating m^r, where m is a NxN square matrix
+ * Time complexity: O(N^ 3 * log(r))
  * 
  * USAGE:
  * We can calculate linear dps (such as fibonacci) by using this technique, 
