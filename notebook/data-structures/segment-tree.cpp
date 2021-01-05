@@ -9,7 +9,8 @@ typedef unsigned int ui;
  *
  * SEGMENT TREE.
  * O(log(N)) per query.
- * 
+ * REQUIRED:
+ *  - join
  * */
 
 const int MAXN = 100000;
