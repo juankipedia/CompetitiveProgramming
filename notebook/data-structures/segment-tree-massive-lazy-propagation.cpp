@@ -8,14 +8,20 @@ typedef unsigned int ui;
 /**
  * 
  * SEGMENT TREE FOR MASSIVE OPERATIONS WITH LAZY PROPAGATION
- *
+ * 
+ * for example:
+ *  assign value v to all elements on the segment from l to r. (sta[])
+ *  find the sum on the segment from l to r. (st[])
+ *  
+ *  note: additional operation should be distributive.
+ *  
  * REQUIRED:
  *      - operation
  *      - join
  * VARIABLES:
- *      st[]: segment tree for the sum.
- *      sta[]: lazy propagated segment tree.
- *      stb[]: to know if a given node of the segment tree has an operation to be propagated.
+ *      st[]: segment tree.
+ *      sta[]: lazy propagated segment tree for additional operations.
+ *      stb[]: to know if a given node of the segment tree (sta[]) has an operation to be propagated.
  *      a[]: initial array of values.
  *   
  * */
