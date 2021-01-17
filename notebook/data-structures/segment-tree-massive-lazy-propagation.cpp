@@ -56,7 +56,7 @@ void build(int ss, int se, int si){
 
 void propagate(int ss, int se, int si){
     if(!stb[si]) return;
-    operation(ss, se, si); // sets value for st[si].
+    operation(ss, se, si); // sets value for st[si] using value in sta[si].
     stb[si] = false;
     if(ss == se) return;
     sta[L] = sta[R] = sta[si];
@@ -74,7 +74,7 @@ void update(int ss, int se, int si, int qs, int qe, lli val){
     }
     update(ss, MID, L, qs, qe, val);
     update(MID + 1, se, R, qs, qe, val);
-    st[si] = join(st[R], st[L]);
+    st[si] = join(st[L], st[R]);
 }
  
 lli get(int ss, int se, int si, int qs, int qe){
