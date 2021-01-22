@@ -78,8 +78,8 @@ ulli combination_iterative(ulli n, ulli k){
 void divisors(int n){  
     for(int i = 1; i * i <= n; i++)
         if(n % i == 0)
-            if(n / i == i) printf("%d ", i); 
-            else printf("%d %d ", i, n / i);
+            if(n / i == i) cout << i << " "; 
+            else cout << i << " " << n / i << " ";
 }
 
 /**

@@ -1,7 +1,7 @@
 /**
  *  STATEMENT: You are given a tree with N nodes. The tree nodes are numbered from 1 to N. Each node has an integer weight.
  *  We will ask you to perform the following operation:
- *      u - v : ask for how many different integers that represent the weight of nodes there are on the path from u to v.
+ *      u - v : ask for how many different weights of nodes are on the path from u to v.
  * 
  *  SOLUTION: Transform the tree in to an array using MODIFIED version of euler tour path, apply mo's algorithm over the resulting array.
  *  We have 2 cases, for a path u - v:
