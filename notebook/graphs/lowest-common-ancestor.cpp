@@ -55,7 +55,7 @@ int lca(int u, int v){
 /**
  * Lowest common ancestor (LCA). euler tour + sparse table.
  * 
- * We will find the LCA of each query by building the euler tour and finding the verter with the minimun height
+ * We will find the LCA of each query by building the euler tour and finding the vertex with the minimun height
  * in the segment [first[u], first[v]].  Which stores for each vertex v its first occurrence in euler tour.
  * 
  **/
