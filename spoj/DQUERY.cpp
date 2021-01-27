@@ -1,97 +1,70 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-typedef long long int lli;
+
 # define endl "\n"
 # define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
- 
-/**
- * 
- * MO's Algorithm.
- * 
- * Answer queries over a segment [l, r] of the array. For example frequency of the most repeated element in the segment [l, r]
- * Requires: add(int i), del(int i), get_ans()
- * 
- * */
- 
-const int MAXM = 200005; // Maximun number of queries.
-const int MAXN = 30005; // Maximun number of elements in the array.
- 
-int N; // Array size
-int M; // Number of queries
-int BLOCK_SIZE; // sqrt(N) Bucket size
-int l, r;
- 
+typedef unsigned long long int ulli;
+typedef long long int lli;
+typedef unsigned int ui;
+
+const int MAXN = 3e4, MAXQ = 2e5, MAXA = 1e6 + 5;
+
 struct Query{
     int l, r, idx;
 };
- 
-Query queries[MAXM];
-int ans[MAXM];
- 
-lli a[MAXN];
- 
-// required por coordinates compression
-pair<lli, int> b[MAXN]; // ordered sequence of a
-int id[MAXN]; // id to map each element of a
- 
 
-bool cmp(Query &a, Query &b){
-    if(a.l / BLOCK_SIZE  == b.l / BLOCK_SIZE) return a.r > b.r;
-    else return a.l / BLOCK_SIZE < b.l / BLOCK_SIZE;
-}
+Query q[MAXQ];
+int a[MAXN], ans[MAXQ], pos[MAXA], N, Q;
 
-int freq[MAXN], res;
-
-void add(int i){
-    if(!freq[id[i]]) res++; 
-    freq[id[i]]++;
-}
- 
-void del(int i){
-    freq[id[i]]--;
-    if(!freq[id[i]]) res--; 
-}
- 
-int get_ans(){
-    return res;
-}
- 
-void mos(){
-    BLOCK_SIZE = sqrt(N);
-    // Coordinates compression for mapping elements in a[]
-    for(int i = 0; i < N; i++)
-        b[i] = {a[i], i};
-    sort(b, b + N);
-    int cid = 0;
-    for(int i = 0; i < N; i++){
-        if(i != 0 && b[i - 1].first != b[i].first) cid++;
-        id[b[i].second] = cid;
+struct FenwickTree{
+    vector<lli> bit;
+    int N;
+    FenwickTree(int n){
+        N = n;
+        bit.assign(N, 0);
     }
-    // End of coordinates compression 
-    sort(queries, queries + M, cmp);
-    l = 0;
-    r = -1;
-    for(int i = 0; i < M; i++){
-        while(r < queries[i].r) add(++r);
-        while(l > queries[i].l) add(--l);
-        while(r > queries[i].r) del(r--);
-        while(l < queries[i].l) del(l++);
-        ans[queries[i].idx] = get_ans();
+
+    lli sum(int r){
+        lli ret = 0;
+        for(; r >= 0; r = (r & (r + 1)) - 1)
+            ret += bit[r];
+        return ret;
     }
-}
+
+    lli sum(int l, int r){
+        return sum(r) - sum(l - 1);
+    }
+
+    void add(lli val, int i){
+        for(; i < N; i = i | (i + 1))
+            bit[i] += val;
+    }
+};
 
 int main(){
     cin >> N;
     for(int i = 0; i < N; i++) cin >> a[i];
-    cin >> M;
-    for(int i = 0; i < M; i++){
-        cin >> queries[i].l >> queries[i].r;
-        queries[i].l--;
-        queries[i].r--;
-        queries[i].idx = i;
+    cin >> Q;
+    for(int i = 0; i < Q; i++){
+        cin >> q[i].l >> q[i].r;
+        q[i].idx = i;
+        q[i].l--;
+        q[i].r--;
     }
-    mos();
-    for(int i = 0; i < M; i++) cout << ans[i] << endl;
+    sort(q, q + Q, [](auto &q1, auto &q2){ return q1.r < q2.r;});
+    FenwickTree tree(N);
+    memset(pos, -1, sizeof(pos));
+    int j = 0;
+    for(int i = 0; i < N; i++){
+        if(pos[a[i]] != -1) tree.add(-1, pos[a[i]]);
+        pos[a[i]] = i;
+        tree.add(1, i);
+        while(j < Q && q[j].r == i){
+            if(q[j].l == 0) ans[q[j].idx] = tree.sum(i); 
+            else ans[q[j].idx] = tree.sum(i) - tree.sum(q[j].l - 1);
+            j++;
+        }
+    }
+    for(int i = 0; i < Q; i++) cout << ans[i] << endl;
     return 0;
 }
