@@ -12,6 +12,8 @@ typedef long long int lli;
  * Answer queries over a segment [l, r] of the array. For example frequency of the most repeated element in the segment [l, r]
  * Requires: add(int i), del(int i), get_ans()
  * 
+ * Time Complexity N * N / BLOCK_SIZE + BLOCK_SIZE * M  
+ * 
  * */
  
 const int MAXM = 500005; // Maximun number of queries.
