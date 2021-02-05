@@ -34,7 +34,7 @@ void dfs(int u, int p, int h){
 }
 
 int lca(int u, int v){
-    // First both u, v should be at the same distance from the root (hight).
+    // First both u, v should be at the same distance from the root (height).
     if(dist[u] < dist[v]) swap(u, v);
     int offset = dist[u] - dist[v];
     for(int i = 0; i <= LOG2N; i++)
