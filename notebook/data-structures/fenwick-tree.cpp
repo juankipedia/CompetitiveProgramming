@@ -16,18 +16,18 @@ typedef long long int lli;
 
 struct FenwickTree{
     vector<lli> bit;
-    int N;
+    int n;
     
-    FenwickTree(int n){
-        N = n;
-        bit.assign(N, 0);        
+    FenwickTree(int N){
+        n = N;
+        bit.assign(n, 0);        
     }
     
-    FenwickTree(lli a[], int n){
-        N = n;
-        bit.assign(N, 0);
-        for(int i = 0; i < N; i++)
-            add(a[i], i);
+    FenwickTree(lli a[], int N){
+        n = N;
+        bit.assign(n, 0);
+        for(int i = 0; i < n; i++)
+            add(i, a[i]);
     }
 
     lli sum(int r){
@@ -42,7 +42,7 @@ struct FenwickTree{
     }
 
     void add(int i, lli delta){
-        for(; i < N; i = i | (i + 1))
+        for(; i < n; i = i | (i + 1))
             bit[i] += delta;
     }
 };
@@ -66,15 +66,15 @@ struct FenwickTree2D {
     FenwickTree2D(int N, int M){
         n = N;
         m = M;
-        bit.assign(N, vector<lli>(M, 0));
+        bit.assign(n, vector<lli>(m, 0));
     }
 
-    FenwickTree2D(vector<vector<int>> &a, int N, int M){
+    FenwickTree2D(vector<vector<lli>> &a, int N, int M){
         n = N;
         m = M;
-        bit.assign(N, vector<lli>(M, 0));
-        for(int i = 0; i < N; i++)
-            for(int j = 0; j < M; j++)
+        bit.assign(n, vector<lli>(m, 0));
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
                 add(i, j, a[i][j]);
     }
 
