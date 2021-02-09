@@ -13,7 +13,6 @@ typedef unsigned int ui;
  *  Time complexity: O(n)
  **/
 
-int t;
 string txt, p;
 int lps[1000000];
 
