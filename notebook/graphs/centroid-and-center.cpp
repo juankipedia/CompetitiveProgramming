@@ -7,7 +7,7 @@ using namespace std;
  * 
  * A centroid is a node v such that.
  *      maxi(n - S(v), S(u1), S(u2), .. S(um)) <= n/2
- * where ui is i'th child to v.
+ * where ui is the i'th child of v.
  * 
  * Every tree only have one or two centroids.
  * 
