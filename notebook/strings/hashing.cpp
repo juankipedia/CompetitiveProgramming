@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef unsigned long long int ulli;
-typedef long long int lli;
-
 ulli MODS[] = {1000000007, 10657331232548839, 790738119649411319};
 
 /**

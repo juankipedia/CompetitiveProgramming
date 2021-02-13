@@ -1,12 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-# define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-typedef unsigned long long int ulli;
-typedef long long int lli;
-typedef unsigned int ui; 
-
 /**
  * DYNAMIC AHO CORASICK
  * As long as the trie of the aho corasick cannot be modified once it built, this code
@@ -18,8 +9,6 @@ typedef unsigned int ui;
  
 const int TRIE_LEN = 300000; // Dictionary size * length of words
 const int LOG_TRIE_LEN = 20; // log2(TRIE_LEN)
-int N, t;
-string S;
  
 struct Automata{
     map<int, map<int, int>> trie;
@@ -116,17 +105,6 @@ struct DynamicAutomata{
 
 DynamicAutomata insertions, deletions;
 
-int main(){
-    io_boost;
-    cin >> N;
-    for(int i = 0; i < N; i++){
-        cin >> t >> S;
-        if(t == 1) insertions.add(S);
-        else if(t == 2) deletions.add(S);
-        else{
-            cout << insertions.count(S) - deletions.count(S) << endl;
-            cout.flush();
-        }
-    }
-    return 0;
+int count(string &s){
+    return insertions.count(S) - deletions.count(S);
 }
