@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
  *  KMP.
  *  Find all occurrences of p in txt (pattern searching).
