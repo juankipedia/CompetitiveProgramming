@@ -1,12 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-# define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-typedef unsigned long long int ulli;
-typedef long long int lli;
-typedef unsigned int ui;
-
 /**
  *  KMP AUTOMATA.
  *  Find all occurrences of p in txt (pattern searching), this version is useful for dynamic programing problems.
@@ -14,8 +5,6 @@ typedef unsigned int ui;
  *  Time complexity: O(n), less than normal kmp.
  **/
 
-
-int t;
 string txt, p;
 int lps[1000000], automata[1000000][26];
 
@@ -48,10 +37,7 @@ void build_automata(){
             automata[i][j] = find_k(i, j);
 }
 
-
-int main(){
-    io_boost;
-    cin >> txt >> p;
+vector<int> find_pattern(){
     build_automata();
     vector<int> ans;
     int i = 0, j = 0;
@@ -60,10 +46,5 @@ int main(){
         if(j == p.size()) ans.push_back(i - j + 1);
         i++;
     }
-    if(ans.size() == 0) cout << "Not Found" << endl;
-    else{
-        cout << ans.size() << endl;
-        for(int pos : ans) cout << pos << " ";
-    }
-    return 0;
+    return ans;
 }

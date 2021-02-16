@@ -1,11 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef unsigned long long int ulli;
-typedef long long int lli;
-typedef unsigned int ui;
-
-
 /**
  * 
  * AHO CORASICK NO SIMPLIFIED AUTOMATA.
@@ -16,10 +8,8 @@ typedef unsigned int ui;
 
 const int TRIE_LEN = 2000005; // Dictionary size * length of words
 
-int n;
-vector<string> dictionary;
-string w;
 
+vector<string> dictionary;
 vector<string> queries; // in case of single query replace this with a single string
 
 int trie[TRIE_LEN][26], nodes = 1, failure[TRIE_LEN], fail_out[TRIE_LEN];
