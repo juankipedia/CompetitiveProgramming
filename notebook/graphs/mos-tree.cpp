@@ -1,3 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+# define endl "\n"
+# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+typedef unsigned long long int ulli;
+typedef long long int lli;
+typedef unsigned int ui;
+
 /**
  *  STATEMENT: You are given a tree with N nodes. The tree nodes are numbered from 1 to N. Each node has an integer weight.
  *  We will ask you to perform the following operation:
@@ -5,20 +14,13 @@
  * 
  *  SOLUTION: Transform the tree in to an array using MODIFIED version of euler tour path, apply mo's algorithm over the resulting array.
  *  We have 2 cases, for a path u - v:
- *      1- if lca(u, v) != u && lca(u, v) != u, then the answer for the query is mos([out[u], in[v]] U {LCA(u, v)}).
+ *      1- if lca(u, v) != u && lca(u, v) != v, then the answer for the query is mos([out[u], in[v]] U {LCA(u, v)}).
  *      2- if lca(u, v) == u || lca(u, v) == v, then the answer for the query is mos([in[u], in[v]])
  * 
  *  NOTE: if some vertex appears in a segment of the euler tour an odd number of times then its value is included in the segment, 
  *  it is not included otherwise.
- * */
+ **/
 
-
-#include <bits/stdc++.h>
-using namespace std;
- 
-# define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-typedef long long int lli;
  
 const int MAXN = 40004, MAXM = 100005, LOG2N = 16;
 vector<int> g[MAXN];
@@ -101,8 +103,8 @@ int get_ans(int LCA){
 }
  
 void mos(){
-    // Coordinates compression for weights
     BLOCK_SIZE = sqrt(t);
+    // Coordinates compression for weights
     for(int i = 0; i < t; i++)
         b[i] = {w[a[i]], i};
     sort(b, b + t);
