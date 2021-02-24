@@ -57,26 +57,27 @@ int find_pattern(vector<lli> &p, vector<lli> &txt){
 }
 
 int main(){
-    cin >> hp >> wp >> ht >> wt;
-    for(int i = 0; i < hp; i++){
-        cin >> p[i];
-        rolling_hash(p[i], Hp[i], b, 2, MOD);
-    }
-    for(int i = 0; i < ht; i++){
-        cin >> txt[i];
-        rolling_hash(txt[i], Ht[i], b, 2, MOD);
-    }
-    vector<vector<lli>> mt;
-    vector<lli> mp;
-    for(int j = 0; (j + wp - 1) < wt; j++){
-        mt.push_back({});
+    while(cin >> hp >> wp >> ht >> wt){
+        for(int i = 0; i < hp; i++){
+            cin >> p[i];
+            rolling_hash(p[i], Hp[i], b, 2, MOD);
+        }
+        for(int i = 0; i < ht; i++){
+            cin >> txt[i];
+            rolling_hash(txt[i], Ht[i], b, 2, MOD);
+        }
+        vector<vector<lli>> mt;
+        vector<lli> mp;
+        for(int j = 0; (j + wp - 1) < wt; j++){
+            mt.push_back({});
 
-        for(int i = 0; i < ht; i++)
-            mt[j].push_back(get_hash(j, j + wp - 1, Ht[i], b, MOD));
+            for(int i = 0; i < ht; i++)
+                mt[j].push_back(get_hash(j, j + wp - 1, Ht[i], b, MOD));
+        }
+        for(int i = 0; i < hp; i++) mp.push_back(get_hash(0, wp - 1, Hp[i], b, MOD));
+        int ans = 0;
+        for(int i = 0; i < mt.size(); i++) ans += find_pattern(mp, mt[i]);
+        cout << ans << endl;
     }
-    for(int i = 0; i < hp; i++) mp.push_back(get_hash(0, wp - 1, Hp[i], b, MOD));
-    int ans = 0;
-    for(int i = 0; i < mt.size(); i++) ans += find_pattern(mp, mt[i]);
-    cout << ans << endl;
     return 0;
 }
