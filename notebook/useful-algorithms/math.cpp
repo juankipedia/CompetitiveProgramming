@@ -78,6 +78,7 @@ void divisors(int n){
 /**
  *
  * SIEVE OF ERATOSTHENES
+ * Time complexity: O(n log(log n))
  * 
  **/
 void sieve_of_eratosthenes(int n){ 
@@ -90,6 +91,24 @@ void sieve_of_eratosthenes(int n){
         }
     } 
     for(int p = 2; p <= n; p++) 
-        if(prime[p])
-        cout << p << " "; 
+        if(prime[p]) cout << p << " "; 
+}
+
+
+/**
+ * 
+ * GET ALL PRIME FACTORS
+ * Time complexity: 
+ *  O(sqrt(n)), upper bound, when n is prime then function 
+ *  reaches worst case.
+ * 
+ **/
+
+void prime_factors(int n){
+    while(n % 2 == 0) cout << 2 << " ", n = n/2;  
+  
+    for(int i = 3; i <= sqrt(n); i = i + 2)  
+        while(n % i == 0) cout << i << " ", n = n/i;
+    
+    if(n > 2) cout << n << " ";
 }
