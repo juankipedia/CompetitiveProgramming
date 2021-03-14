@@ -2,7 +2,7 @@
  * 
  * AHO CORASICK AUTOMATA.
  * 
- * time complexity O(|txt| + sum(|pattern_i|) + matches).
+ * time complexity O(|txt| * sqrt(sum(|pattern_i|))).
  * 
  **/
  

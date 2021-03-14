@@ -2,7 +2,7 @@
  * 
  * AHO CORASICK NO SIMPLIFIED AUTOMATA.
  * 
- * time complexity O(N sqrt(N)).
+ * time complexity O(|txt| * sqrt(sum(|pattern_i|))).
  *  
  **/
 
