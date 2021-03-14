@@ -52,7 +52,7 @@ void check(){
         cur = trie[cur][cc];
         int f = cur;
         while(f){
-            // do something
+            if(end_word[f]); // do something
             f = fail_out[f];
         }
         //do something

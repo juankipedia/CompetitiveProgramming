@@ -62,7 +62,7 @@ void check(int i){
 
         int f = fail_out[cur];
         while(f){
-            // do something
+            if(end_word[f]); // do something
             f = fail_out[f];
         }
         //do something
