@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+# include <bits/stdc++.h>
 using namespace std;
 
 # define endl "\n"
@@ -7,21 +7,21 @@ typedef unsigned long long int ulli;
 typedef long long int lli;
 typedef unsigned int ui;
 
-int t, n;
-lli p[100000];
+int t, N;
+lli a[100005];
 
 int main(){
     cin >> t;
     while(t--){
-        cin >> n;
-        for(int i = 0; i < n; i++) cin >> p[i];
-        lli ans = 0;
-        for(int i = 0; i < n; i++){
-            if(p[i] > 0) ans += p[i];
-            else if(p[i] < 0){
-                lli d = min(-p[i], ans);
-                p[i] += d;
-                ans -= d;
+        cin >> N;
+
+        for(int i = 0; i < N; i++) cin >> a[i];
+        lli ans = 0, acc = 0;
+        for(int i = N - 1; i >= 0; i--){
+            if(a[i] < 0) acc += -a[i];
+            else{
+                ans += a[i] - min(acc, a[i]);
+                acc -= min(acc, a[i]);
             }
         }
         cout << ans << endl;
