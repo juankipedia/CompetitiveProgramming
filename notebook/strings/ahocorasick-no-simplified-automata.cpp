@@ -60,7 +60,7 @@ void check(int i){
         while(cur && !trie[cur][cc]) cur = failure[cur]; // this while is the difference with the simplified one
         cur = trie[cur][cc];
 
-        int f = fail_out[cur];
+        int f = cur;
         while(f){
             if(end_word[f]); // do something
             f = fail_out[f];
