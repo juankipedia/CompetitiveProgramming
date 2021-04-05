@@ -23,6 +23,8 @@ int main(){
         }
         string a = s, b = s;
         bool open = true;
+        a[0] = b[0] = '(';
+        a[N - 1] = b[N - 1] = ')';
         for(int i = 1; i < N - 1; i++){
             if(s[i] == '1'){
                 if(open) a[i] = b[i]  = '(';
@@ -34,7 +36,7 @@ int main(){
         for(int i = 1; i < N - 1; i++){
             if(s[i] == '0'){
                 if(open) a[i]  = '(', b[i] = ')';
-                else a[i] = ')', b[i] = ')';
+                else a[i] = ')', b[i] = '(';
                 open = !open;
             }
         }
