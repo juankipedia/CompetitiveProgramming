@@ -12,7 +12,7 @@
 ulli pow(ulli n, ulli e){
     ulli res = 1;
     while(e > 0ULL){
-      if (e & 1) res *= n;
+      if(e & 1) res *= n;
       e >>= 1;
       n *= n;
     }
