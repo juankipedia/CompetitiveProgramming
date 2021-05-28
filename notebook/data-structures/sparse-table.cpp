@@ -6,6 +6,7 @@
  * can compute the answer in O(1) time. The only drawback of this data structure is, that it can only be used on immutable 
  * arrays. This means, that the array cannot be changed between two queries. If any element in the array changes, the 
  * complete data structure has to be recomputed.
+ * Build function time complexity: O(N logN)
  *  
  **/
 
