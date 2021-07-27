@@ -2,77 +2,133 @@
  * 
  * SEGMENT TREE FOR MASSIVE OPERATIONS WITH LAZY PROPAGATION
  * 
- * for example:
- *  assign value v to all elements on the segment from l to r. (sta[])
- *  find the sum on the segment from l to r. (st[])
+ *  Example:
+ *  assign value v to all elements on the segment from l to r. (sta)
+ *  find the sum on the segment from l to r. (st)
  *  
- *  note: additional operation should be distributive.
+ *  note: additional operation must be distributive.
  *  
  * REQUIRED:
+ *      - set_children
  *      - operation
  *      - join
+ *      - NEUTRAL
+ * 
+ *      For assignment and sum, (assignment is the additional operation):
+ * 
+ *          T NEUTRAL(){ return 0; }
+ *          T join(T lval, T rval){
+ *              return lval + rval;
+ *          }         
+ *          void operation(int ss, int se, int si){
+ *              st[si] = (se - ss + 1) * sta[si];
+ *          }
+ *          void set_children(int ss, int se, int si){
+ *              if(ss == se) return;
+ *              sta[L(si)] = sta[R(si)] = sta[si];
+ *              stb[L(si)] = stb[R(si)] = true;
+ *          }
+ *              
+ *      For addition and minimum, (addition is the additional operation):
+ * 
+ *          T NEUTRAL(){ return oo; }
+ *          T join(T lval, T rval){
+ *              return min(lval, rval);
+ *          }         
+ *          void operation(int ss, int se, int si){
+ *              st[si] += sta[si];
+ *          }
+ *          void set_children(int ss, int se, int si){
+ *              if(ss == se){
+ *                  sta[si] = 0;
+ *                  return;
+ *              }
+ *              sta[L(si)] += sta[si];
+ *              sta[R(si)] += sta[si];
+ *              stb[L(si)] = stb[R(si)] = true;
+ *              sta[si] = 0;
+ *          }
+ *
  * VARIABLES:
- *      st[]: segment tree.
- *      sta[]: lazy propagated segment tree for additional operations.
- *      stb[]: to know if a given node of the segment tree (sta[]) has an operation to be propagated.
- *      a[]: initial array of values.
+ *      st: segment tree.
+ *      sta: lazy propagated segment tree for additional operations.
+ *      stb: to know if a given node of the segment tree (sta) has an operation to be propagated.
+ *      a: initial array of values.
  *   
  * */
 
-const int MAXN = 100000;
-int N;
-lli st[3 * MAXN], sta[3 * MAXN], a[MAXN];
-bool stb[3 * MAXN];
- 
-# define R 2 * si + 2
-# define L 2 * si + 1
-# define MID ss + (se - ss) / 2
-# define NEUTRAL 0
- 
-lli join(lli lval, lli rval){
-    return NEUTRAL;
-}
+template<class T> class SegmentTree{
 
-void operation(int ss, int se, int si){
+public:
+    int N;
+    vector<T> st, sta;
+    vector<bool> stb;
 
-}
+    int R(int si){ return 2 * si + 2; }
+    int L(int si){ return 2 * si + 1; }
+    int MID(int ss, int se){ return (se + ss) / 2; }
+    T NEUTRAL(){ return 0; }
 
-void build(int ss, int se, int si){
-    if(ss == se){
-        st[si] = a[ss];
-        return;
+    SegmentTree(vector<T> &a){
+        N = a.size();
+        st.resize(3 * (N + 5), 0);
+        sta.resize(3 * (N + 5), 0);
+        stb.resize(3 * (N + 5), false);
+        build(a, 0, N - 1);
     }
-    build(ss, MID, L);
-    build(MID + 1, se, R);
-    st[si] = join(st[L], st[R]); 
-}
 
-void propagate(int ss, int se, int si){
-    if(!stb[si]) return;
-    operation(ss, se, si); // sets value for st[si] using value in sta[si].
-    stb[si] = false;
-    if(ss == se) return;
-    sta[L] = sta[R] = sta[si];
-    stb[L] = stb[R] = true;
-}
- 
-void update(int ss, int se, int si, int qs, int qe, lli val){
-    propagate(ss, se, si);
-    if(ss > qe || se < qs) return;
-    if(qs <= ss && se <= qe){
-        stb[si] = true;
-        sta[si] = val;
+    SegmentTree(int n){
+        N = n;
+        st.resize(3 * (N + 5), 0);
+        sta.resize(3 * (N + 5), 0);
+        stb.resize(3 * (N + 5), false);
+    }
+
+    T join(T lval, T rval){
+    }
+
+    void build(vector<T> &a, int ss, int se, int si = 0){
+        if(ss == se){
+            st[si] = a[ss];
+            return;
+        }
+        build(a, ss, MID(ss, se), L(si));
+        build(a, MID(ss, se) + 1, se, R(si));
+        st[si] = join(st[L(si)], st[R(si)]); 
+    }
+
+    void operation(int ss, int se, int si){
+    }
+
+    void set_children(int ss, int se, int si){
+    }
+    void propagate(int ss, int se, int si){
+        if(!stb[si]) return;
+        operation(ss, se, si); // sets value for st[si] using value in sta[si].
+        stb[si] = false;
+        set_children(ss, se, si); // sets the value of children given parent si.
+    }
+
+    void update(int qs, int qe, lli val){ return update(0, N - 1, 0, qs, qe, val); }
+    void update(int ss, int se, int si, int qs, int qe, lli val){
         propagate(ss, se, si);
-        return;
+        if(ss > qe || se < qs) return;
+        if(qs <= ss && se <= qe){
+            stb[si] = true;
+            sta[si] = val;
+            propagate(ss, se, si);
+            return;
+        }
+        update(ss, MID(ss, se), L(si), qs, qe, val);
+        update(MID(ss, se) + 1, se, R(si), qs, qe, val);
+        st[si] = join(st[L(si)], st[R(si)]);
     }
-    update(ss, MID, L, qs, qe, val);
-    update(MID + 1, se, R, qs, qe, val);
-    st[si] = join(st[L], st[R]);
-}
- 
-lli get(int ss, int se, int si, int qs, int qe){
-    propagate(ss, se, si);
-    if(qs <= ss && se <= qe) return st[si];
-    if(ss > qe || se < qs) return NEUTRAL;
-    return join(get(ss, MID, L, qs, qe), get(MID + 1, se, R, qs, qe));
-}
+
+    lli get(int qs, int qe){ return get(0, N - 1, 0, qs, qe); }
+    lli get(int ss, int se, int si, int qs, int qe){
+        propagate(ss, se, si);
+        if(qs <= ss && se <= qe) return st[si];
+        if(ss > qe || se < qs) return NEUTRAL();
+        return join(get(ss, MID(ss, se), L(si), qs, qe), get(MID(ss, se) + 1, se, R(si), qs, qe));
+    }
+};
