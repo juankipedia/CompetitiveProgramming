@@ -57,9 +57,8 @@
  *   
  * */
 
-template<class T> class SegmentTree{
-
-public:
+template<class T> struct SegmentTree{
+    
     int N;
     vector<T> st, sta;
     vector<bool> stb;
