@@ -23,9 +23,9 @@
  *          void operation(int ss, int se, int si){
  *              st[si] = (se - ss + 1) * sta[si];
  *          }
- *          void set_children(int ss, int se, int si){
+ *          void set_children(int ss, int se, int si, T val){
  *              if(ss == se) return;
- *              sta[L(si)] = sta[R(si)] = sta[si];
+ *              sta[L(si)] = sta[R(si)] = val;
  *              stb[L(si)] = stb[R(si)] = true;
  *          }
  *              
@@ -38,15 +38,11 @@
  *          void operation(int ss, int se, int si){
  *              st[si] += sta[si];
  *          }
- *          void set_children(int ss, int se, int si){
- *              if(ss == se){
- *                  sta[si] = 0;
- *                  return;
- *              }
- *              sta[L(si)] += sta[si];
- *              sta[R(si)] += sta[si];
+ *          void set_children(int ss, int se, int si, T val){
+ *              if(ss == se) return;
+ *              sta[L(si)] += val;
+ *              sta[R(si)] += val;
  *              stb[L(si)] = stb[R(si)] = true;
- *              sta[si] = 0;
  *          }
  *
  * VARIABLES:
@@ -68,19 +64,17 @@ template<class T> struct SegmentTree{
     int MID(int ss, int se){ return (se + ss) / 2; }
     T NEUTRAL(){ return 0; }
 
-    SegmentTree(vector<T> &a){
-        N = a.size();
-        st.resize(3 * (N + 5), 0);
-        sta.resize(3 * (N + 5), 0);
-        stb.resize(3 * (N + 5), false);
+    SegmentTree(vector<T> &a) : N(a.size()){
+        st.resize(4 * N, 0);
+        sta.resize(4 * N, 0);
+        stb.resize(4 * N, false);
         build(a, 0, N - 1);
     }
 
-    SegmentTree(int n){
-        N = n;
-        st.resize(3 * (N + 5), 0);
-        sta.resize(3 * (N + 5), 0);
-        stb.resize(3 * (N + 5), false);
+    SegmentTree(int n) : N(n){
+        st.resize(4 * N, 0);
+        sta.resize(4 * N, 0);
+        stb.resize(4 * N, false);
     }
 
     T join(T lval, T rval){
@@ -99,13 +93,14 @@ template<class T> struct SegmentTree{
     void operation(int ss, int se, int si){
     }
 
-    void set_children(int ss, int se, int si){
+    void set_children(int ss, int se, int si, T val){
     }
     void propagate(int ss, int se, int si){
         if(!stb[si]) return;
         operation(ss, se, si); // sets value for st[si] using value in sta[si].
         stb[si] = false;
-        set_children(ss, se, si); // sets the value of children given parent si.
+        set_children(ss, se, si, sta[si]); // sets the value of children given parent si.
+        sta[si] = 0;
     }
 
     void update(int qs, int qe, lli val){ return update(0, N - 1, 0, qs, qe, val); }
