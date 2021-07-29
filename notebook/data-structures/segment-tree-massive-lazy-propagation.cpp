@@ -65,16 +65,16 @@ template<class T> struct SegmentTree{
     T NEUTRAL(){ return 0; }
 
     SegmentTree(vector<T> &a) : N(a.size()){
-        st.resize(4 * N, 0);
-        sta.resize(4 * N, 0);
-        stb.resize(4 * N, false);
+        st.assign(4 * N, 0);
+        sta.assign(4 * N, 0);
+        stb.assign(4 * N, false);
         build(a, 0, N - 1);
     }
 
     SegmentTree(int n) : N(n){
-        st.resize(4 * N, 0);
-        sta.resize(4 * N, 0);
-        stb.resize(4 * N, false);
+        st.assign(4 * N, 0);
+        sta.assign(4 * N, 0);
+        stb.assign(4 * N, false);
     }
 
     T join(T lval, T rval){
