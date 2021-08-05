@@ -103,8 +103,8 @@ template<class T> struct SegmentTree{
         sta[si] = 0;
     }
 
-    void update(int qs, int qe, lli val){ return update(0, N - 1, 0, qs, qe, val); }
-    void update(int ss, int se, int si, int qs, int qe, lli val){
+    void update(int qs, int qe, T val){ return update(0, N - 1, 0, qs, qe, val); }
+    void update(int ss, int se, int si, int qs, int qe, T val){
         propagate(ss, se, si);
         if(ss > qe || se < qs) return;
         if(qs <= ss && se <= qe){
@@ -118,8 +118,8 @@ template<class T> struct SegmentTree{
         st[si] = join(st[L(si)], st[R(si)]);
     }
 
-    lli get(int qs, int qe){ return get(0, N - 1, 0, qs, qe); }
-    lli get(int ss, int se, int si, int qs, int qe){
+    T get(int qs, int qe){ return get(0, N - 1, 0, qs, qe); }
+    T get(int ss, int se, int si, int qs, int qe){
         propagate(ss, se, si);
         if(qs <= ss && se <= qe) return st[si];
         if(ss > qe || se < qs) return NEUTRAL();
