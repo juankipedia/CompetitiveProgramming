@@ -10,8 +10,7 @@
 const int MAXN = 1000000;
 const int LOG2N = 20; // log2(MAXN)
 vector<int> g[MAXN];
-int up[MAXN][LOG2N + 1]; //sparse table.
-int dist[MAXN];
+int up[MAXN][LOG2N + 1], dist[MAXN];
 
 void dfs(int u, int p, int h){
     dist[u] = h;
