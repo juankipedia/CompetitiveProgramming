@@ -4,7 +4,7 @@
  * O(log(N)) per query.
  * REQUIRED:
  *  - join
- *  - set_value
+ *  - set_node
  *  - NEUTRAL
  * */
 
@@ -46,13 +46,15 @@ template<class T> struct SegmentTree{
                     get(MID(ss, se) + 1, se, R(si), qs, qe));   
     }
     
-    // sets new value of st[si] in update query
-    T set_value(int si, T val){
+    // sets new value of st[si] = node in update query
+    T set_node(T& node, T val){
+        // assign node
+        return node;
     }
  
     T update(int i, T val){ return update(0, N - 1, 0, i, val); }
     T update(int ss, int se, int si, int i, T val){
-        if(ss == se) return set_value(si, val);
+        if(ss == se) return set_node(st[si], val);
         if(i <= MID(ss, se)) return st[si] = join(update(ss, MID(ss, se), L(si), i, val), 
                                                   st[R(si)]);
         else return st[si] = join(st[L(si)], update(MID(ss, se) + 1, se, R(si), i, val));
