@@ -74,7 +74,9 @@ template<class T> struct Node{
     }
 
     void set_children(T val){
-
+        if(ss == se) return;
+        //set children
+        left->stb = right->stb = true;
     }
     void propagate(){
         if(left == nullptr && right == nullptr){

@@ -94,6 +94,9 @@ template<class T> struct SegmentTree{
     }
 
     void set_children(int ss, int se, int si, T val){
+        if(ss == se) return;
+        //set children
+        stb[L(si)] = stb[R(si)] = true;
     }
     void propagate(int ss, int se, int si){
         if(!stb[si]) return;
