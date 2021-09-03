@@ -47,7 +47,7 @@ template<class T> struct SegmentTree{
     }
     
     // sets new value of st[si] = node in update query
-    T set_node(T& node, T val){
+    T set_node(T &node, T val){
         // assign node
         return node;
     }
