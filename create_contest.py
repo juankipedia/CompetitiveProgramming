@@ -3,7 +3,7 @@
 #   python3 create_contest.py <template path> <destination directory> <number of problems>
 #
 # Example:
-#   python3 create_contest.py ~/CompetitiveProgramming/notebook/template.cpp ~/Desktop/exercises 7
+#   python3 create_contest.py ./template.cpp ~/Desktop/exercises 7
 
 import sys
 import os.path
