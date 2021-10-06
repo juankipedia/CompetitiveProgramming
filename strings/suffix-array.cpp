@@ -16,7 +16,7 @@
  **/
 
 
-vector<int> build(string const& s){
+vector<int> build(const string &s){
     int n = s.size();
     const int alphabet = 256;
     vector<int> p(n), c(n), cnt(max(alphabet, n), 0);
@@ -62,7 +62,7 @@ vector<int> get_suffix_array(string &s){
     return sorted_shifts;
 }
 
-vector<int> lcp_build(string const &s, vector<int> const &p){
+vector<int> lcp_build(const string &s, const vector<int> &p){
     int n = s.size();
     vector<int> rank(n, 0);
     for(int i = 0; i < n; i++) rank[p[i]] = i;
