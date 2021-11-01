@@ -1,4 +1,4 @@
-struct DSU {
+struct DSU{
     int n, comp = n;
     vector<int> p, len;
     DSU(int n) : n(n){

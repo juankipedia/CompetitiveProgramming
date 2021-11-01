@@ -6,16 +6,19 @@
  * 
  * */
 
-# define U(t) t.second.first
-# define V(t) t.second.second
-# define W(t) t.first
-typedef pair<lli, pair<int, int>> edge; 
+struct edge{
+    lli w;
+    int u, v;
+    bool operator < (const edge &e){
+        return w < e.w;
+    }
+};
 
 const int MAXM = 100000, MAXN = 100000;
 edge edges[MAXM], mst[MAXN];
 int N, M;
 
-struct DSU {
+struct DSU{
     int n, comp = n;
     vector<int> p, len;
     DSU(int n) : n(n){
@@ -39,11 +42,11 @@ lli kruskal(){
     sort(edges, edges + M);
     lli sum = 0;
     for(int i = 0, e = 0; i < N - 1;){
-        int u = dsu.find(U(edges[e])), v = dsu.find(V(edges[e]));
+        int u = dsu.find(edges[e].u), v = dsu.find(edges[e].v);
         if(u != v){
             dsu.join(u, v);
             mst[i++] = edges[e];
-            sum += W(edges[e]);
+            sum += edges[e].w;
         }
         e++;
     }
