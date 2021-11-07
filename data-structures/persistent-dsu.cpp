@@ -12,7 +12,7 @@
 struct DSU{
 
     struct operation{
-        int a, b, la, lb;
+        int a, b, lb;
     };
 
     int n, comp = n;
@@ -31,7 +31,7 @@ struct DSU{
         a = find(a), b = find(b);
         if(a == b) return;
         if(len[a] < len[b]) swap(a, b);
-        if(checkpoint) history.push({a, b, len[a], len[b]});
+        if(checkpoint) history.push({a, b, len[b]});
         len[a] += len[b];
         p[b] = a;
         comp--;
@@ -39,7 +39,7 @@ struct DSU{
 
     void rollback(){
         while(!history.empty()){
-            auto [a, b, la, lb] = history.top();
+            auto [a, b, lb] = history.top();
             history.pop();
             if(a == -1){
                 if(history.empty()) checkpoint = 0;
@@ -47,7 +47,7 @@ struct DSU{
             }
             p[b] = b;
             comp++;
-            len[a] = la;
+            len[a] -= lb;
             len[b] = lb;
         }
         checkpoint = 0;
