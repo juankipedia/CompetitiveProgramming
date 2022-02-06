@@ -9,12 +9,13 @@
  * }
  *  
  **/
-ulli pow(ulli n, ulli e){
+ulli binpow(ulli a, ulli b, ulli m) {
+    a %= m;
     ulli res = 1;
-    while(e > 0ULL){
-      if(e & 1) res *= n;
-      e >>= 1;
-      n *= n;
+    while(b > 0){
+        if(b & 1) res = res * a % m;
+        a = a * a % m;
+        b >>= 1;
     }
     return res;
 }
