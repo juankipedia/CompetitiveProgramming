@@ -2,9 +2,12 @@
  *
  * LIS, longest incriasing subsequence.
  * NOTE: 
- *  if the sequence is not strictly grater change line 25 for using upper_bound instead of
- *  lower_bound and chance line 37 for using s[i] <= s[pos] instead of s[i] < s[pos].
- *
+ *  if the sequence is not strictly grater change line 19 for using upper_bound instead of
+ *  lower_bound and chance line 30 for using s[i] <= s[pos] instead of s[i] < s[pos].
+ *  
+ *  This problem could also be solved using a segment tree dp.
+ *  For each element in s, find max(dp[s[i]], dp[s[i] - 1])
+ * 
  * */
 
 const int MAXN = 30000;
