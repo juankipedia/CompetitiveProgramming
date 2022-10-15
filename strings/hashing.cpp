@@ -1,4 +1,3 @@
-ulli MODS[] = {1000000007, 10657331232548839, 790738119649411319};
 
 /**
  * ROLLING HASH
@@ -14,32 +13,37 @@ ulli MODS[] = {1000000007, 10657331232548839, 790738119649411319};
 *        and another with, b2 = alphabet size + 5.
 */
 
-// Using single variable.
-ulli rolling_hash(string &s, ulli b, ulli p){
-    //hash(s) = sum(s[i] * b ^ (n - 1 - i)) % p, for all i in [i, n = s.size()]
-    ulli hash = (s[0] - 'a' + 1);
-    for(int i = 1; i < s.size(); i++)
-        hash = ((hash * b) % p + (s[i] - 'a' + 1ULL)) % p;
-    return hash;
-}
+struct Hash{
+    vector<lli> h, b;
+    lli B, p;
+    string s;
 
-// Using array. Useful for getting hash of a subsegment, complete hash at get_hash(0, s.size() - 1)
-// hash stored in h[] and B ^ i = b[i]
-void rolling_hash(string &s, lli h[], lli b[], lli B, lli p){
-    h[0] = 0;
-    h[1] = (s[0] - 'a' + 1);
-    b[0] = 1;
-    for(int i = 1; i < s.size(); i++){
-        h[i + 1] = ((h[i] * B) % p + (s[i] - 'a' + 1LL)) % p;
-        b[i] = (B * b[i - 1]) % p;   
+    ulli MODS[] = {1000000007, 10657331232548839, 790738119649411319};
+
+
+    Hash(const string &_s, int _B=31, int _p=MODS[0]){
+        s = _s, B = _B, p = _p;
+        h.assign(s.size() + 5, 0);
+        b.assign(s.size() + 5, 0);
+        rolling_hash();
     }
-}
+
+    void rolling_hash(){
+        h[0] = 0;
+        h[1] = (s[0] - 'a' + 1);
+        b[0] = 1;
+        for(int i = 1; i < s.size(); i++){
+            h[i + 1] = ((h[i] * B) % p + (s[i] - 'a' + 1LL)) % p;
+            b[i] = (B * b[i - 1]) % p;   
+        }
+    }
 
 
-lli get_hash(int l, int r, lli h[], lli b[], lli p){
-    return (h[r + 1] - ((h[l] * b[r - l + 1]) % p) + p) % p;
-}
+    lli get_hash(int l, int r){
+        return (h[r + 1] - ((h[l] * b[r - l + 1]) % p) + p) % p;
+    }
 
+};
 
 
 /**
