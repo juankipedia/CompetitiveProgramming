@@ -10,7 +10,9 @@
  * hash(s) = sum(s[i] * b ^ (n - 1 - i)) % p, for all i in [i, n = s.size()]
  * 
  * NOTE: some times it is useful to use double hash one with, b1 = alphabet size, 
-*        and another with, b2 = alphabet size + 5.
+ *        and another with, b2 = alphabet size + 5.
+ * 
+ * PRIMES: 1000000007, 10657331232548839, 790738119649411319
 */
 
 struct Hash{
@@ -18,10 +20,7 @@ struct Hash{
     lli B, p;
     string s;
 
-    ulli MODS[] = {1000000007, 10657331232548839, 790738119649411319};
-
-
-    Hash(const string &_s, int _B=31, int _p=MODS[0]){
+    Hash(const string &_s, int _B=31, int _p=1000000007){
         s = _s, B = _B, p = _p;
         h.assign(s.size() + 5, 0);
         b.assign(s.size() + 5, 0);
@@ -44,7 +43,6 @@ struct Hash{
     }
 
 };
-
 
 /**
  * GENERATE RANDOM NUMBER IN [a, b]
