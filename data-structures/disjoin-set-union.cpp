@@ -1,7 +1,7 @@
-struct DSU{
+struct Dsu{
     int n, comp = n;
     vector<int> p, len;
-    DSU(int n) : n(n){
+    Dsu(int n) : n(n){
         p.assign(n + 10, 0); 
         iota(p.begin(), p.end(), 0);
         len.assign(n + 10, 1);

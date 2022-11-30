@@ -6,32 +6,29 @@
  * 
  * */
 
-typedef pair<lli, int> p_lli_i;
-
 const lli oo = numeric_limits<lli>::max();
 
 const int MAXN = 100000;
-int N, M, parent[MAXN];
-vector<p_lli_i> g[MAXN];
+int N, M;
+vector<pair<lli, int>> g[MAXN];
 
-void prim(){
+vector<int> prim(){
     bool in_mst[N] = {false};
     vector<lli> key(N, oo);
-    priority_queue<p_lli_i, vector<p_lli_i>, greater<p_lli_i>> pq;
+    vector<int> parent(N, -1);
+    priority_queue<pair<lli, int>, vector<pair<lli, int>>, greater<pair<lli, int>>> pq;
     pq.push({0, 0});
     key[0] = 0;
     while(!pq.empty()){
         int u = pq.top().second;
         pq.pop();
         in_mst[u] = true;
-        for(p_lli_i &p: g[u]){
-            int v = p.second;
-            lli w = p.first;
+        for(auto [w, v]: g[u])
             if(!in_mst[v] && key[v] > w){
                 key[v] = w;
                 parent[v] = u;
                 pq.push({w, v});
             }
-        }
-    }   
+    }
+    return parent;
 }

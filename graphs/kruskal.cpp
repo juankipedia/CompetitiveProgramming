@@ -18,10 +18,10 @@ const int MAXM = 100000, MAXN = 100000;
 edge edges[MAXM], mst[MAXN];
 int N, M;
 
-struct DSU{
+struct Dsu{
     int n, comp = n;
     vector<int> p, len;
-    DSU(int n) : n(n){
+    Dsu(int n) : n(n){
         p.assign(n + 10, 0); 
         iota(p.begin(), p.end(), 0);
         len.assign(n + 10, 1);
@@ -38,7 +38,7 @@ struct DSU{
 };
 
 lli kruskal(){
-    DSU dsu(N);
+    Dsu dsu(N);
     sort(edges, edges + M);
     lli sum = 0;
     for(int i = 0, e = 0; i < N - 1;){
