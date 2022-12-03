@@ -9,66 +9,69 @@
  * 
  * */
  
-const int MAXM = 500005; // Maximun number of queries.
-const int MAXN = 500005; // Maximun number of elements in the array.
- 
-int N; // Array size
-int M; // Number of queries
-int BLOCK_SIZE; // sqrt(N) Bucket size
-int l, r;
- 
-struct Query{
-    int l, r, idx;
+struct Mos{
+
+    struct Query{
+        int l, r, idx;
+    };
+
+    int N, M, BLOCK_SIZE, l, r;
+
+    vector<Query> queries;
+    vector<lli> ans, a;
+
+    vector<pair<lli, int>> b;
+    vector<int> id;
+
+    Mos(int n, int m){
+        N = n;
+        M = m;
+        BLOCK_SIZE = sqrt(N);
+        
+        queries.assign(M, Query());
+        ans.assign(M, 0);
+        a.assign(N, 0);
+
+        b.assign(N, {0, 0});
+        id.assign(N, 0);
+    }
+
+    void add(int i){
+    }
+
+    void del(int i){
+    }
+
+    
+    lli get_ans(){
+        return 0;
+    }
+    
+    void mos(){
+        BLOCK_SIZE = sqrt(N);
+        
+        for(int i = 0; i < N; i++) b[i] = {a[i], i};
+        sort(b.begin(), b.end());
+        int cid = 0;
+        for(int i = 0; i < N; i++){
+            if(i != 0 && b[i - 1].first != b[i].first) cid++;
+            id[b[i].second] = cid;
+        }
+        
+        sort(queries.begin(), queries.end(), [&](const auto &a, const auto &b){
+            if(a.l / BLOCK_SIZE  == b.l / BLOCK_SIZE) return a.r > b.r;
+            else return a.l / BLOCK_SIZE < b.l / BLOCK_SIZE;
+        });
+
+        l = 0;
+        r = -1;
+        for(int i = 0; i < M; i++){
+            while(r < queries[i].r) add(++r);
+            while(l > queries[i].l) add(--l);
+            while(r > queries[i].r) del(r--);
+            while(l < queries[i].l) del(l++);
+            ans[queries[i].idx] = get_ans();
+        }
+    }
+
 };
- 
-Query queries[MAXM];
-int ans[MAXM];
- 
-lli a[MAXN];
- 
-// required por coordinates compression
-pair<lli, int> b[MAXN]; // ordered sequence of a
-int id[MAXN]; // id to map each element of a
- 
-
-bool cmp(Query &a, Query &b){
-    if(a.l / BLOCK_SIZE  == b.l / BLOCK_SIZE) return a.r > b.r;
-    else return a.l / BLOCK_SIZE < b.l / BLOCK_SIZE;
-}
- 
-void add(int i){
-
-}
- 
-void del(int i){
-
-}
- 
-int get_ans(){
-}
- 
-void mos(){
-    BLOCK_SIZE = sqrt(N);
-    // Coordinates compression for mapping elements in a[]
-    for(int i = 0; i < N; i++)
-        b[i] = {a[i], i};
-    sort(b, b + N);
-    int cid = 0;
-    for(int i = 0; i < N; i++){
-        if(i != 0 && b[i - 1].first != b[i].first) cid++;
-        id[b[i].second] = cid;
-    }
-    // End of coordinates compression 
-    sort(queries, queries + M, cmp);
-    l = 0;
-    r = -1;
-    for(int i = 0; i < M; i++){
-        while(r < queries[i].r) add(++r);
-        while(l > queries[i].l) add(--l);
-        while(r > queries[i].r) del(r--);
-        while(l < queries[i].l) del(l++);
-        ans[queries[i].idx] = get_ans();
-    }
-}
-
- 
