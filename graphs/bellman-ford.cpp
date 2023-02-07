@@ -8,12 +8,12 @@
  * 
  * */
 
-const lli oo = numeric_limits<lli>::max();
+const ll oo = numeric_limits<ll>::max();
 int N, M;
 
-vector<tuple<int, int, lli>> edges;
+vector<tuple<int, int, ll>> edges;
 
-bool bellman_ford(int src, vector<lli> &dist){
+bool bellman_ford(int src, vector<ll> &dist){
     dist.assign(N, oo);
     dist[src] = 0;
     bool x;
