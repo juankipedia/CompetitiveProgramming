@@ -15,7 +15,7 @@
  * 
  **/
 
-const ulli MOD = 1e5 + 7;
+const ull MOD = 1e5 + 7;
 
 template<class T> struct Matrix{
     vector<vector<T>> m;
@@ -35,17 +35,17 @@ template<class T> struct Matrix{
     }
 };
 
-template<class T> Matrix<T> fpow(Matrix<T> M, ulli r){
+template<class T> Matrix<T> fpow(Matrix<T> M, ull r){
     Matrix<T> ans(true, M.N, M.N);
     for(; r; M = M * M, r >>= 1)
         if(r & 1) ans = ans * M;
     return ans;
 }
 
-ulli fibonacci(ulli n){
+ull fibonacci(ull n){
     if(n == 0) return 0;
     if(n == 1) return 1;
-    Matrix<ulli> I(false, 1, 2), M(false, 2, 2); 
+    Matrix<ull> I(false, 1, 2), M(false, 2, 2); 
     I.m = {{0, 1}};
     M.m = {{0, 1}, {1, 1}};
     M = fpow(M, n - 1);
