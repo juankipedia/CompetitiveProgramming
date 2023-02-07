@@ -1,11 +1,13 @@
-#include <bits/stdc++.h>
+# include <bits/stdc++.h>
 using namespace std;
-
 # define endl "\n"
-# define io_boost std::ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-typedef unsigned long long int ulli;
-typedef long long int lli;
-typedef unsigned int ui;
+# define io_boost ios_base::sync_with_stdio(0);cin.tie(0);
+using ull = unsigned long long;
+using ll = long long;
+/*
+    Que mira bobo ? 
+    JUANKI
+*/
 
 /**
  *  STATEMENT: You are given a tree with N nodes. The tree nodes are numbered from 1 to N. Each node has an integer weight.
@@ -28,7 +30,7 @@ vector<int> g[MAXN];
 // EULER TOUR and LCA.
 
 int a[2 * MAXN], up[MAXN][LOG2N + 5], dist[MAXN], N, M, in[MAXN], out[MAXN], t = 0;
-lli w[MAXN];
+ll w[MAXN];
 
 void dfs(int u, int p, int h){
     a[t] = u;
@@ -63,7 +65,7 @@ struct Query{
     int l, r, idx, lca;
 };
 Query queries[MAXM];
-pair<lli, int> b[2 * MAXN];
+pair<ll, int> b[2 * MAXN];
 
 // id[] stores ids coordinates compression for weights of the vertices.
 int BLOCK_SIZE, l, r, freq[2 * MAXN], res, ans[MAXM], id[2 * MAXN], cnt[MAXN];
@@ -137,10 +139,10 @@ int main(){
         g[v].push_back(u);
     }
     dfs(0, 0, 0);
-    for(lli i = 0, u, v; i < M; i++){
+    for(ll i = 0, u, v; i < M; i++){
         cin >> u >> v;
         u--; v--;
-        lli LCA = lca(u, v);
+        ll LCA = lca(u, v);
         if(in[u] > in[v]) swap(u, v);
         if(LCA == u){
             queries[i].l = in[u];
@@ -158,4 +160,3 @@ int main(){
     for(int i = 0; i < M; i++) cout << ans[i] << endl;
     return 0;
 }
-  
