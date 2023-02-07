@@ -18,9 +18,9 @@ struct Mos{
     int N, M, BLOCK_SIZE, l, r;
 
     vector<Query> queries;
-    vector<lli> ans, a;
+    vector<ll> ans, a;
 
-    vector<pair<lli, int>> b;
+    vector<pair<ll, int>> b;
     vector<int> id;
 
     Mos(int n, int m){
@@ -43,7 +43,7 @@ struct Mos{
     }
 
     
-    lli get_ans(){
+    ll get_ans(){
         return 0;
     }
     
