@@ -7,7 +7,7 @@
  * */
 
 struct edge{
-    lli w;
+    ll w;
     int u, v;
     bool operator < (const edge &e){
         return w < e.w;
@@ -37,10 +37,10 @@ struct Dsu{
     }
 };
 
-lli kruskal(){
+ll kruskal(){
     Dsu dsu(N);
     sort(edges, edges + M);
-    lli sum = 0;
+    ll sum = 0;
     for(int i = 0, e = 0; i < N - 1;){
         int u = dsu.find(edges[e].u), v = dsu.find(edges[e].v);
         if(u != v){
