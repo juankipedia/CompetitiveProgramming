@@ -1,36 +1,42 @@
-vector<int> parent, depth, heavy, head, pos;
-int cur_pos;
 
-int dfs(int v, vector<vector<int>> &g){
-    int size = 1, max_c_size = 0;
-    for(int c : g[v])
-        if(c != parent[v]){
-            parent[c] = v, depth[c] = depth[v] + 1;
-            int c_size = dfs(c, g);
-            size += c_size;
-            if(c_size > max_c_size)
-                max_c_size = c_size, heavy[v] = c;
-        }
-    return size;
-}
+struct HLD{
+    vector<int> parent, depth, heavy, head, pos, len;
+    int cur_pos, n;
 
-void decompose(int v, int h, vector<vector<int>> &g){
-    head[v] = h, pos[v] = cur_pos++;
-    if(heavy[v] != -1) decompose(heavy[v], h, g);
-    for(int c : g[v])
-        if(c != parent[v] && c != heavy[v])
-            decompose(c, c, g);
-}
+    int dfs(int u, vector<int> g[]){
+        int size = 1, mx = 0;
+        for(int v : g[u])
+            if(v != parent[u]){
+                parent[v] = u, depth[v] = depth[u] + 1;
+                int v_size = dfs(v, g);
+                size += v_size;
+                if(v_size > mx)
+                    mx = v_size, heavy[u] = v;
+            }
+        return size;
+    }
 
-void init(vector<vector<int>> &g){
-    int n = g.size();
-    parent = vector<int>(n);
-    depth = vector<int>(n);
-    heavy = vector<int>(n, -1);
-    head = vector<int>(n);
-    pos = vector<int>(n);
-    cur_pos = 0;
+    void decompose(int u, int h, vector<int> g[]){
+        head[u] = h, pos[u] = cur_pos++;
+        if(heavy[u] != -1) decompose(heavy[u], h, g);
+        for(int v : g[u])
+            if(v != parent[u] && v != heavy[u])
+                decompose(v, v, g);
+    }
 
-    dfs(0, g);
-    decompose(0, 0, g);
-}
+    HLD(int N, vector<int> g[]){
+        n = N;
+        parent = vector<int>(n);
+        depth = vector<int>(n);
+        heavy = vector<int>(n, -1);
+        head = vector<int>(n);
+        pos = vector<int>(n);
+        cur_pos = 0;
+
+        dfs(0, g);
+        decompose(0, 0, g);
+    }
+
+};
+
+
