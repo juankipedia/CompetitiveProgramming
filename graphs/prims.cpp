@@ -6,17 +6,17 @@
  * 
  * */
 
-const lli oo = numeric_limits<lli>::max();
+const ll oo = numeric_limits<ll>::max();
 
 const int MAXN = 100000;
 int N, M;
-vector<pair<lli, int>> g[MAXN];
+vector<pair<ll, int>> g[MAXN];
 
 vector<int> prim(){
     bool in_mst[N] = {false};
-    vector<lli> key(N, oo);
+    vector<ll> key(N, oo);
     vector<int> parent(N, -1);
-    priority_queue<pair<lli, int>, vector<pair<lli, int>>, greater<pair<lli, int>>> pq;
+    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
     pq.push({0, 0});
     key[0] = 0;
     while(!pq.empty()){
