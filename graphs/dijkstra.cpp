@@ -9,12 +9,12 @@
  * 
  * */
 
-const lli oo = numeric_limits<lli>::max(), MAXN = 100000;
-vector<pair<lli, int>> g[MAXN];
+const ll oo = numeric_limits<ll>::max(), MAXN = 100000;
+vector<pair<ll, int>> g[MAXN];
 int N;
 
-void dijkstra(int src, vector<lli> &dist){
-    priority_queue<pair<lli, int>, vector<pair<lli, int>>, greater<pair<lli, int>>> pq; 
+void dijkstra(int src, vector<ll> &dist){
+    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq; 
     dist.assign(N, oo); 
     pq.push({0, src}); 
     dist[src] = 0; 
@@ -29,4 +29,3 @@ void dijkstra(int src, vector<lli> &dist){
             }
     }
 } 
-
