@@ -1,5 +1,5 @@
 
-struct HLD{
+struct Hld{
     vector<int> parent, depth, heavy, head, pos, len;
     int cur_pos, n;
 
@@ -24,7 +24,7 @@ struct HLD{
                 decompose(v, v, g);
     }
 
-    HLD(int N, vector<int> g[]){
+    Hld(int N, vector<int> g[]){
         n = N;
         parent = vector<int>(n);
         depth = vector<int>(n);
