@@ -1,16 +1,16 @@
 struct mint {
-    static lli& mod(){
-        static lli MOD = 0;
+    static ll& mod(){
+        static ll MOD = 0;
         return MOD;
     }
-    static void set_mod(const lli p){ mod() = p; }
-	lli value;
-	mint(lli v = 0) { value = v % mod(); if (value < 0) value += mod();}
-	mint(lli a, lli b) : value(0){ *this += a; *this /= b;}
+    static void set_mod(const ll p){ mod() = p; }
+	ll value;
+	mint(ll v = 0) { value = v % mod(); if (value < 0) value += mod();}
+	mint(ll a, ll b) : value(0){ *this += a; *this /= b;}
 	mint& operator+=(mint const& b) {value += b.value; if (value >= mod()) value -= mod(); return *this;}
 	mint& operator-=(mint const& b) {value -= b.value; if (value < 0) value += mod();return *this;}
-	mint& operator*=(mint const& b) {value = (lli)value * b.value % mod();return *this;}
-	friend mint powmod(mint a, lli e) {
+	mint& operator*=(mint const& b) {value = (ll)value * b.value % mod();return *this;}
+	friend mint powmod(mint a, ll e) {
 		mint res = 1; while (e) { if (e&1) res *= a; a *= a; e >>= 1; }
 		return res;
 	}
@@ -27,16 +27,16 @@ struct mint {
 };
 
 
-const lli mod = 1e9 + 7;
-template <lli MOD=mod> struct Modular {
-	lli value;
-	static const lli MOD_value = MOD;
-	Modular(lli v = 0) { value = v % MOD; if (value < 0) value += MOD;}
-	Modular(lli a, lli b) : value(0){ *this += a; *this /= b;}
+const ll mod = 1e9 + 7;
+template <ll MOD=mod> struct Modular {
+	ll value;
+	static const ll MOD_value = MOD;
+	Modular(ll v = 0) { value = v % MOD; if (value < 0) value += MOD;}
+	Modular(ll a, ll b) : value(0){ *this += a; *this /= b;}
 	Modular& operator+=(Modular const& b) {value += b.value; if (value >= MOD) value -= MOD; return *this;}
 	Modular& operator-=(Modular const& b) {value -= b.value; if (value < 0) value += MOD;return *this;}
-	Modular& operator*=(Modular const& b) {value = (lli)value * b.value % MOD;return *this;}
-	friend Modular powmod(Modular a, lli e) {
+	Modular& operator*=(Modular const& b) {value = (ll)value * b.value % MOD;return *this;}
+	friend Modular powmod(Modular a, ll e) {
 		Modular res = 1; while (e) { if (e&1) res *= a; a *= a; e >>= 1; }
 		return res;
 	}
