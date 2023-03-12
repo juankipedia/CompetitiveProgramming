@@ -23,15 +23,15 @@ ull binpow(ull a, ull b, ull m) {
 
 /**
  * 
- * COMBINATION (Binomial coefficient). 
+ * CHOOSE (Binomial coefficient). 
  *
  **/
-ull combination(ull n, ull k){ 
+ull choose(ull n, ull k){ 
   if(k == 0 || k == n) return 1; 
-  return combination(n - 1, k - 1) + combination(n - 1, k); 
+  return choose(n - 1, k - 1) + choose(n - 1, k); 
 }
 
-ull combination_iterative(ull n, ull k){ 
+ull choose(ull n, ull k){ 
     ull C[k+1] = {0}; 
     C[0] = 1;
     for(ull i = 1; i <= n; i++) 
