@@ -1,9 +1,9 @@
 struct mint {
-    static ll& mod(){
-        static ll MOD = 0;
-        return MOD;
-    }
-    static void set_mod(const ll p){ mod() = p; }
+	static ll& mod(){
+		static ll MOD = 0;
+		return MOD;
+	}
+	static void set_mod(const ll p){ mod() = p; }
 	ll value;
 	mint(ll v = 0) { value = v % mod(); if (value < 0) value += mod();}
 	mint(ll a, ll b) : value(0){ *this += a; *this /= b;}
