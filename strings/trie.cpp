@@ -15,7 +15,7 @@ struct Trie{
     int nodes = 1;
     vector<vector<int>> trie;
 
-    Trie(int TRIE_LEN = 400005, int ALPHA_SIZE = 26){ // Dictionary size * length of words
+    Trie(int TRIE_LEN = 400005,int ALPHA_SIZE = 26){ // Dictionary size * length of words
         end_word.assign(TRIE_LEN, 0);
         trie.assign(TRIE_LEN, vector<int>(ALPHA_SIZE, 0));
     }
@@ -41,5 +41,3 @@ struct Trie{
         return false;
     }
 };
-    return false;
-}
