@@ -49,7 +49,6 @@ ull combination_iterative(ull n, ull k){
  *  reaches worst case.
  * 
  **/
-
 void prime_factors(int n){
     while(n % 2 == 0) cout << 2 << " ", n = n / 2;  
   
