@@ -5,6 +5,5 @@ using namespace std;
 using ull = unsigned long long;
 using ll = long long;
 /*
-    Que mira bobo ? 
     JUANKI
 */
