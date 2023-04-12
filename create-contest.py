@@ -3,16 +3,15 @@ import shutil
 import sys
 import requests
 
-def download_template():
-    url = "https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/template.cpp"
+def download_file(url):
     response = requests.get(url)
     if response.status_code == 200:
         return response.text
     else:
-        print(f"Error downloading template.cpp: HTTP {response.status_code}")
+        print(f"Error downloading {url}: HTTP {response.status_code}")
         sys.exit(1)
 
-def create_contest_files(num, template_content):
+def create_contest_files(num, template_content, test_content):
     if num < 1 or num > 26:
         print("Please provide a number between 1 and 26.")
         return
@@ -24,6 +23,10 @@ def create_contest_files(num, template_content):
         cpp_file = os.path.join(dir_name, f"{dir_name}.cpp")
         with open(cpp_file, "w") as f:
             f.write(template_content)
+
+        test_file = os.path.join(dir_name, "test.bsh")
+        with open(test_file, "w") as f:
+            f.write(test_content)
 
         for j in range(1, 5):
             input_file = os.path.join(dir_name, f"in{j}")
@@ -45,5 +48,6 @@ if __name__ == "__main__":
         delete_contest_files()
     else:
         num = int(sys.argv[1])
-        template_content = download_template()
-        create_contest_files(num, template_content)
+        template_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/template.cpp")
+        test_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/test.bsh")
+        create_contest_files(num, template_content, test_content)
