@@ -1,0 +1,42 @@
+[
+    {
+        "key": "ctrl+alt+0",
+        "command": "workbench.action.tasks.runTask",
+        "args": "execute"
+    },
+    {
+        "key": "ctrl+alt+1",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run1"
+    },
+    {
+        "key": "ctrl+alt+2",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run2"
+    },
+    {
+        "key": "ctrl+alt+3",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run1"
+    },
+    {
+        "key": "ctrl+alt+3",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run3"
+    },
+    {
+        "key": "ctrl+alt+4",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run4"
+    },
+    {
+        "key": "ctrl+alt+5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run5"
+    },
+    {
+        "key": "ctrl+alt+6",
+        "command": "workbench.action.tasks.runTask",
+        "args": "run6"
+    },
+]
