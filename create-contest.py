@@ -1,42 +1,49 @@
-# Create Contest script.
-# call this script like:
-#   python3 create_contest.py <template path> <destination directory> <number of problems>
-#
-# Example:
-#   python3 create_contest.py ./template.cpp ~/Desktop/exercises 7
-
+import os
+import shutil
 import sys
-import os.path
-from string import ascii_uppercase
+import requests
 
-if len(sys.argv) != 4:
-    raise Exception("Wrong number of arguments")
+def download_template():
+    url = "https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/template.cpp"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        print(f"Error downloading template.cpp: HTTP {response.status_code}")
+        sys.exit(1)
 
-n = int(sys.argv[3])
+def create_contest_files(num, template_content):
+    if num < 1 or num > 26:
+        print("Please provide a number between 1 and 26.")
+        return
 
-if n > 26:
-    raise Exception("Number of problems cannot be greater than 26")
-elif n <= 0:
-    raise Exception("Number of problems has to be greater than 1")
+    for i in range(num):
+        dir_name = chr(ord('A') + i)
+        os.makedirs(dir_name, exist_ok=True)
 
-if not os.path.isfile(sys.argv[1]):
-    raise Exception("Template not found")
+        cpp_file = os.path.join(dir_name, f"{dir_name}.cpp")
+        with open(cpp_file, "w") as f:
+            f.write(template_content)
 
-if not os.path.isdir(sys.argv[2]):
-    raise Exception("Destination directory not found")
+        for j in range(1, 5):
+            input_file = os.path.join(dir_name, f"in{j}")
+            with open(input_file, "w") as f:
+                pass  # Creates empty input files
 
-template_file = open(sys.argv[1], "r")
-template = template_file.read()
+def delete_contest_files():
+    for i in range(26):
+        dir_name = chr(ord('A') + i)
+        if os.path.exists(dir_name):
+            shutil.rmtree(dir_name)
 
-destination = ""
-if sys.argv[2][-1] == '/':
-    destination = sys.argv[2]
-else:
-    destination = sys.argv[2] + '/'
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python create_contest.py <num> | clean")
+        sys.exit(1)
 
-for c in ascii_uppercase:
-    f = open(destination + c + '.cpp', 'w')
-    f.write(template)
-    n -= 1
-    if n == 0:
-        break
+    if sys.argv[1].lower() == "clean":
+        delete_contest_files()
+    else:
+        num = int(sys.argv[1])
+        template_content = download_template()
+        create_contest_files(num, template_content)
