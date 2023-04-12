@@ -1,0 +1,83 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile",
+      "type": "shell",
+      "command": "g++-12 -std=c++17 -O2 ${file} -o ${fileDirname}/${fileBasenameNoExtension}.out",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "execute",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "run1",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in1",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    },
+    {
+      "label": "run2",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in2",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    },
+    {
+      "label": "run3",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in3",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    },
+    {
+      "label": "run4",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in4",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    },
+    {
+      "label": "run5",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in5",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    },
+    {
+      "label": "run6",
+      "type": "shell",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.out < ${fileDirname}/in6",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["compile"]
+    }
+  ]
+}
