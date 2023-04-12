@@ -51,3 +51,4 @@ if __name__ == "__main__":
         template_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/template.cpp")
         test_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/test.bsh")
         create_contest_files(num, template_content, test_content)
+
