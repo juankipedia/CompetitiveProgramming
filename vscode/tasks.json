@@ -17,7 +17,8 @@
       "presentation": {
         "reveal": "always",
         "panel": "new"
-      }
+      },
+      "dependsOn": ["compile"]
     },
     {
       "label": "run1",
