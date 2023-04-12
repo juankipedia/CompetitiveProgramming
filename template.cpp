@@ -7,3 +7,8 @@ using ll = long long;
 /*
     JUANKI
 */
+
+int main(){
+    io_boost;
+    return 0;
+}
