@@ -1,15 +1,18 @@
 #!/bin/bash
 VAR1=1;
 VAR2=1;
-while [[ $VAR1 = $VAR2 ]] 
+dir_name=$(basename $(pwd))
+executable="${dir_name}.out"
+
+while [[ $VAR1 = $VAR2 ]]
 do
-	./generate.bin > in4 #gen generates the test, in4 just stores the test
-	VAR1=$(./A.bin < in4) #your solution
-	VAR2=$(./correct.bin < in4) #brute force solution
-	if [[ $VAR1 = $VAR2 ]] 
-	then 
-		echo "OK"
-	fi
+    ./generate.out > in4 # gen generates the test, in4 just stores the test
+    VAR1=$(./${executable} < in4) # your solution
+    VAR2=$(./correct.out < in4) # brute force solution
+    if [[ $VAR1 = $VAR2 ]]
+    then
+        echo "OK"
+    fi
 done
 echo "Wrong Answer, test case:"
 cat in4
