@@ -2,6 +2,15 @@ import os
 import shutil
 import sys
 import requests
+import json
+import platform
+
+    
+keybindings_path = '~/Library/Application Support/Code/User'
+# For Linux, uncomment the following line:
+# keybindings_path = '~/.config/Code/User'
+# For Windows, uncomment the following line:
+# keybindings_path = r'%APPDATA%\Code\User'
 
 def download_file(url):
     response = requests.get(url)
@@ -39,16 +48,52 @@ def delete_contest_files():
         if os.path.exists(dir_name):
             shutil.rmtree(dir_name)
 
+def setup_vscode(tasks_content, keybindings_content):
+    vscode_dir = os.path.join(os.getcwd(), '.vscode')
+
+    if not os.path.exists(vscode_dir):
+        os.makedirs(vscode_dir)
+
+    tasks_file = os.path.join(vscode_dir, 'tasks.json')
+    if not os.path.exists(tasks_file):
+        with open(tasks_file, "w") as f:
+            f.write(tasks_content)
+
+    if keybindings_path:
+        keybindings_file = os.path.join(os.path.expanduser(keybindings_path), 'keybindings.json')
+        with open(keybindings_file, "w") as f:
+            f.write(keybindings_content)
+
+def reset_vscode_config():
+    vscode_dir = os.path.join(os.getcwd(), '.vscode')
+
+    tasks_file = os.path.join(vscode_dir, 'tasks.json')
+    if os.path.exists(tasks_file):
+        os.remove(tasks_file)
+        
+    if keybindings_path:
+        keybindings_file = os.path.join(os.path.expanduser(keybindings_path), 'keybindings.json')
+        if os.path.exists(keybindings_file):
+            with open(keybindings_file, "w") as f:
+                f.write("[]")
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python create_contest.py <num> | clean")
+        print("Usage: python create_contest.py <num> | clean | delete")
         sys.exit(1)
 
     if sys.argv[1].lower() == "clean":
         delete_contest_files()
+    elif sys.argv[1].lower() == "delete":
+        reset_vscode_config()
+        delete_contest_files()
     else:
         num = int(sys.argv[1])
-        template_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/template.cpp")
-        test_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/test.bsh")
+        template_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/utilities/template.cpp")
+        test_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/utilities/test.bsh")
+        tasks_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/utilities/vscode/tasks.json")
+        keybindings_content = download_file("https://raw.githubusercontent.com/juankipedia/CompetitiveProgramming/master/utilities/vscode/keybindings.json")
+
         create_contest_files(num, template_content, test_content)
+        setup_vscode(tasks_content, keybindings_content)
 
