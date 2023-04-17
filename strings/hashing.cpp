@@ -16,8 +16,8 @@
 */
 
 struct Hash{
-    vector<lli> h, b;
-    lli B, p;
+    vector<ll> h, b;
+    ll B, p;
     string s;
 
     Hash(const string &_s, int _B=31, int _p=1000000007){
@@ -38,7 +38,7 @@ struct Hash{
     }
 
 
-    lli get_hash(int l, int r){
+    ll get_hash(int l, int r){
         return (h[r + 1] - ((h[l] * b[r - l + 1]) % p) + p) % p;
     }
 
@@ -49,6 +49,6 @@ struct Hash{
 */
 
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-ulli random(ulli a, ulli b){
-    return uniform_int_distribution<ulli>(a, b)(rng);
+ull random(ull a, ull b){
+    return uniform_int_distribution<ull>(a, b)(rng);
 }
